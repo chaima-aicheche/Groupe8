@@ -1,0 +1,51 @@
+version: '3'
+
+tasks:
+  authentification:
+    desc: Launch Service Authentification DevMode
+    dir: ./code/frontend/Authentification/
+    cmds:
+      - npm install
+      - npm start
+
+  app:
+    desc: Launch Service App DevMode
+    dir: ./code/frontend/App/
+    cmds:
+      - npm install
+      - npm start
+
+  formation:
+    desc: Launch Service Formation DevMode
+    dir: ./code/frontend/Formation/
+    cmds:
+      - npm install
+      - npm start
+
+  front:
+    desc: Launch all Service Front DevMode
+    cmds:
+      - |
+        if [ "$(uname)" == "Linux" ] || [ "$(uname)" == "Darwin" ]; then
+          task dev:authentification &
+          task dev:app &
+          task dev:formation
+        elif [ "$(uname -o 2>/dev/null)" == "Msys" ]; then
+          task dev:authentification
+          task dev:app
+          task dev:formation
+        fi
+  
+  stop:
+    desc: Stop all Service
+    cmds:
+      - |
+        if [ "$(uname)" == "Linux" ] || [ "$(uname)" == "Darwin" ]; then
+          pgrep -f "node|npm" > ./script/pid/pid.txt
+          while read -r pid; do
+            echo "Killing process with PID: $pid"
+            kill "$pid"
+          done < ./script/pid/pid.txt
+        elif [ "$(uname -o 2>/dev/null)" == "Msys" ]; then
+          taskkill //IM node.exe //F //T
+        fi

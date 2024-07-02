@@ -1,0 +1,55 @@
+services:
+  krakend:
+      build:
+        context: infra/krakend
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+        - "8090:8090"
+      networks:
+        - symfony-short-network
+  
+  tech_talent_formation:
+    build:
+      context: code/frontend/Formation
+    container_name: tech_talent_formation
+    ports:
+      - "8084:80"
+    networks:
+      - symfony-short-network
+
+  tech_talent_auth:
+    build:
+      context: code/frontend/Authentification
+    container_name: tech_talent_auth
+    ports:
+      - "8083:80"
+    networks:
+      - symfony-short-network
+
+  tech_talent_app:
+    build:
+      context: code/frontend/App
+    container_name: tech_talent_app
+    ports:
+      - "8082:80"
+    networks:
+      - symfony-short-network
+
+  tech_talent:
+    build:
+      context: ./infra/reverse_proxy
+    container_name: tech_talent
+    ports:
+      - "80:80"
+    networks:
+      symfony-short-network:
+        ipv4_address: 172.20.0.100
+ 
+networks:
+  symfony-short-network:
+    name: symfony-short-network
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
