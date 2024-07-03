@@ -19,3 +19,4 @@ tasks:
     cmds:
       - task config
       - task prod
+

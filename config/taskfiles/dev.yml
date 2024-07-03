@@ -30,12 +30,12 @@ tasks:
           task dev:authentification &
           task dev:app &
           task dev:formation
-        elif [ "$(uname -o 2>/dev/null)" == "Msys" ]; then
+        else
           task dev:authentification
           task dev:app
           task dev:formation
         fi
-  
+
   stop:
     desc: Stop all Service
     cmds:
@@ -46,6 +46,6 @@ tasks:
             echo "Killing process with PID: $pid"
             kill "$pid"
           done < ./script/pid/pid.txt
-        elif [ "$(uname -o 2>/dev/null)" == "Msys" ]; then
+        else
           taskkill //IM node.exe //F //T
         fi

@@ -41,6 +41,7 @@ services:
       context: ./infra/reverse_proxy
     container_name: tech_talent
     ports:
+      - "443:443"
       - "80:80"
     networks:
       symfony-short-network:
@@ -53,3 +54,4 @@ networks:
       driver: default
       config:
         - subnet: 172.20.0.0/16
+
