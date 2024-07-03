@@ -41,7 +41,7 @@ services:
       context: ./infra/reverse_proxy
     container_name: tech_talent
     ports:
-      - "80:80"
+      - "443:443"
     networks:
       symfony-short-network:
         ipv4_address: 172.20.0.100

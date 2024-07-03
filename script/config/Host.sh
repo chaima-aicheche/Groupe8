@@ -4,10 +4,10 @@ NAME_PROJECT="techtalent"
 
 # Entrées à ajouter ou supprimer
 HOST_ENTRIES="
-127.0.0.1 auth.techtalent
-127.0.0.1 app.techtalent
-127.0.0.1 formation.techtalent
-127.0.0.1 techtalent"
+127.0.0.1 auth.techtalent.fr
+127.0.0.1 app.techtalent.fr
+127.0.0.1 formation.techtalent.fr
+127.0.0.1 techtalent.fr"
 
 OS=$(uname)
 
