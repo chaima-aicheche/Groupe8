@@ -5,10 +5,13 @@ import {
 
 } from '../styles/contact.style';
 
+import ContactForm from '../components/forms/ContactForm';
+
 const Contact = () => {
   return (
     <ContainerContact>
-        Contact
+        <h2>Contact</h2>
+        <ContactForm />
     </ContainerContact>
   );
 };

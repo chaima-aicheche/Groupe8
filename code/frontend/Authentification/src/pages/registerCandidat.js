@@ -5,10 +5,13 @@ import {
 
 } from '../styles/registerCandidat.style';
 
+import RegisterCandidateForm from '../components/forms/RegisterCandidateForm';
+
 const RegisterCandidat = () => {
   return (
     <ContainerRegisterCand>
-        RegisterCandidat
+        <h2>Register Candidat</h2>
+        <RegisterCandidateForm />
     </ContainerRegisterCand>
   );
 };

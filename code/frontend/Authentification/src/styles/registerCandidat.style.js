@@ -3,13 +3,20 @@ import styled from 'styled-components';
 export const ContainerRegisterCand = styled.section`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
 
-    height: 75vh;
+    text-align: center;
+
+    min-height: 75vh;
+    height: auto;
     width: 100%;
 
     background-color: rgb(242, 242, 242);
 
     font-family: Arial, Helvetica, sans-serif;
+
+    h2 {
+        font-size: 40px;
+    }
 `;
 
