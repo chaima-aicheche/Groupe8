@@ -11,7 +11,7 @@ import {
   BtnEntrerpise,
   BtnCandidat
 } from '../styles/navbar.style';
-
+import logo from'../assets/logo.png';
 import {
   StyledLink
 } from '../styles/commun.style';
@@ -27,7 +27,9 @@ const Navbar = () => {
   return (
     <ContainerNav>
       <HomeNav>
-        <StyledLink to="/"><h1>Tech Talent</h1></StyledLink>
+      <StyledLink to="/">
+          <img src={logo} alt="Tech Talent Logo" style={{ height: '50px' }} />
+        </StyledLink>
       </HomeNav>
       <Navigation>
         <div>

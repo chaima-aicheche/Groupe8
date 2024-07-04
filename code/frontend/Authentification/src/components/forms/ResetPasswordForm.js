@@ -3,10 +3,9 @@ import './style.css';
 
 const ResetPasswordForm = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    newPassword: '',
-    confirmNewPassword: ''
+    email: ''
   });
+  const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,14 +13,17 @@ const ResetPasswordForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // Simulate sending reset password email
+    console.log(`Sending reset link to ${formData.email}`);
+    setMessage(`A reset link has been sent to ${formData.email}`);
+    setFormData({ email: '' });
   };
 
   return (
     <div className="form-container">
       <div className="form-paragraphe">
         <p>Forgot your password? Reset it here!</p>
-        <div></div>
+        {message && <div className="form-message">{message}</div>}
       </div>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
@@ -33,35 +35,7 @@ const ResetPasswordForm = () => {
               value={formData.email}
               onChange={handleChange}
               className="form-input"
-              autoComplete="email" 
-              required
-            />
-          </div>
-        </div>
-        <div className="form-row">
-          <div className="form-col">
-            <input
-              type="password"
-              name="newPassword"
-              placeholder="New Password"
-              value={formData.newPassword}
-              onChange={handleChange}
-              className="form-input"
-              autoComplete="new-password" 
-              required
-            />
-          </div>
-        </div>
-        <div className="form-row">
-          <div className="form-col">
-            <input
-              type="password"
-              name="confirmNewPassword"
-              placeholder="Confirm New Password"
-              value={formData.confirmNewPassword}
-              onChange={handleChange}
-              className="form-input"
-              autoComplete="new-password" 
+              autoComplete="email"
               required
             />
           </div>
@@ -73,3 +47,4 @@ const ResetPasswordForm = () => {
 };
 
 export default ResetPasswordForm;
+
