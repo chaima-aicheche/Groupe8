@@ -46,6 +46,16 @@ services:
     networks:
       symfony-short-network:
         ipv4_address: 172.20.0.100
+
+
+  authentification:
+    build:
+      context: code/backend/Authentification
+    container_name: authentification
+    ports:
+      - "7070:7070"
+    networks:
+      - symfony-short-network
  
 networks:
   symfony-short-network:
