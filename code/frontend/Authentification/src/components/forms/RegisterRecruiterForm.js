@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './RegisterRecruiterForm.css'; 
+import './style.css'; 
 
 const RegisterRecruiterForm = () => {
   const [formData, setFormData] = useState({
@@ -26,124 +26,137 @@ const RegisterRecruiterForm = () => {
 
   return (
     <div className="form-container">
-        <h1>Register as Recruiter</h1>
+      <div className="form-paragraphe">
+        <p>Unlock your potential to find the best talent.<br />Register as a recruiter now!</p>
+        <div></div>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Nom :</label>
             <input
               type="text"
               name="nom"
+              placeholder="Nom"
               value={formData.nom}
               onChange={handleChange}
               className="form-input"
+              autoComplete="given-name" 
               required
             />
           </div>
           <div className="form-col">
-            <label className="form-label">Prénom :</label>
             <input
               type="text"
               name="prenom"
+              placeholder="Prénom"
               value={formData.prenom}
               onChange={handleChange}
               className="form-input"
+              autoComplete="family-name" 
               required
             />
           </div>
         </div>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Entreprise :</label>
             <input
               type="text"
               name="entreprise"
+              placeholder="Entreprise"
               value={formData.entreprise}
               onChange={handleChange}
               className="form-input"
+              autoComplete="organization" 
               required
             />
           </div>
           <div className="form-col">
-            <label className="form-label">N SIREN / SIRET :</label>
             <input
               type="text"
               name="num"
+              placeholder="N SIREN / SIRET"
               value={formData.num}
               onChange={handleChange}
               className="form-input"
+              autoComplete="off" 
               required
             />
           </div>
         </div>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Adresse :</label>
             <input
               type="text"
               name="adresse"
+              placeholder="Adresse"
               value={formData.adresse}
               onChange={handleChange}
               className="form-input"
+              autoComplete="street-address" 
               required
             />
           </div>
           <div className="form-col">
-            <label className="form-label">Ville :</label>
             <input
               type="text"
               name="ville"
+              placeholder="Ville"
               value={formData.ville}
               onChange={handleChange}
               className="form-input"
+              autoComplete="address-level2" 
               required
             />
           </div>
         </div>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Code postal :</label>
             <input
               type="text"
               name="codepostal"
+              placeholder="Code postal"
               value={formData.codepostal}
               onChange={handleChange}
               className="form-input"
+              autoComplete="postal-code" 
               required
             />
           </div>
           <div className="form-col">
-            <label className="form-label">Pays :</label>
             <input
               type="text"
               name="pays"
+              placeholder="Pays"
               value={formData.pays}
               onChange={handleChange}
               className="form-input"
+              autoComplete="country" 
               required
             />
           </div>
         </div>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Email :</label>
             <input
               type="email"
               name="email"
+              placeholder="Email"
               value={formData.email}
               onChange={handleChange}
               className="form-input"
+              autoComplete="email" 
               required
             />
           </div>
           <div className="form-col">
-            <label className="form-label">Mot de passe :</label>
             <input
               type="password"
               name="password"
+              placeholder="Mot de passe"
               value={formData.password}
               onChange={handleChange}
               className="form-input"
+              autoComplete="current-password" 
               required
             />
           </div>

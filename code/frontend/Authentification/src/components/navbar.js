@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   ContainerNav,
@@ -17,25 +17,32 @@ import {
 } from '../styles/commun.style';
 
 const Navbar = () => {
+
+  const [activeP, setActiveP] = useState('connect');
+
+  const handlePClick = (pName) => {
+    setActiveP(pName);
+  };
+
   return (
     <ContainerNav>
       <HomeNav>
-        <StyledLink to="/">Logo/Home</StyledLink>
+        <StyledLink to="/"><h1>Tech Talent</h1></StyledLink>
       </HomeNav>
       <Navigation>
         <div>
-          <BtnContact>
+          <BtnContact isActive={activeP == 'contact'} onClick={() => handlePClick('contact')}>
             <StyledLink to="/Contact">Contact</StyledLink>
           </BtnContact>
         </div>
         <div>
-          <BtnConnect>
+          <BtnConnect isActive={activeP == 'connect'}  onClick={() => handlePClick('connect')}>
             <StyledLink to="/">Connexion</StyledLink>
           </BtnConnect>
-          <BtnEntrerpise>
+          <BtnEntrerpise isActive={activeP == 'entreprise'}  onClick={() => handlePClick('entreprise')}>
             <StyledLink to="/RegisterEntreprise">Entreprise</StyledLink>
           </BtnEntrerpise>
-          <BtnCandidat>
+          <BtnCandidat isActive={activeP == 'candidat'}  onClick={() => handlePClick('candidat')}>
             <StyledLink to="/RegisterCandidat">Candidat</StyledLink>
           </BtnCandidat>
         </div>

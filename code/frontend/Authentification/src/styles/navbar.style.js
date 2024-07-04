@@ -59,71 +59,67 @@ export const Navigation = styled.nav`
 `;
 
 export const BtnContact = styled.p`
-    color: black;
+    color: ${props => props.isActive ? 'black' : 'initial'};
+    border: ${props => props.isActive ? '1px solid rgba(22, 175, 204, 0.4)' : '1px solid transparent'};
+    border-radius: ${props => props.isActive ? '8px' : 'initial'};
 
     text-align: center;
 
     heigth: 100%;
 
     &:hover {
-        text-decoration: underline;
+        text-decoration: ${props => props.isActive ? '' : 'underline'};
     }
+    padding: 7px;
 `;
 
-export const BtnConnect = styled.p`
-    background-color: rgb(220, 220, 220);
-    color: black;
 
-    border: 1px solid rgb(33, 33, 33);
-    border-radius: 8px;
+
+export const BtnConnect = styled.p`
+    color: ${props => props.isActive ? 'black' : 'initial'};
+    border: ${props => props.isActive ? '1px solid rgba(22, 175, 204, 0.4)' : '1px solid transparent'};
+    border-radius: ${props => props.isActive ? '8px' : 'initial'};
 
     text-align: center;
-    
-    heigth: 100%;
-    width: 80px;
-    padding: 7px;
 
-    margin-right: 20px;
+    heigth: 100%;
 
     &:hover {
-        background-color: rgba(220, 220, 220, 0.6);
-        border: 1px solid rgba(33, 33, 33, 0.6);
+        text-decoration: ${props => props.isActive ? '' : 'underline'};
     }
+
+    margin-right: 20px;
+    padding: 7px;
 `;
 
 export const BtnEntrerpise = styled.p`
-    background-color: rgb(33, 33, 33);
-    color: white;
-
-    border: 1px solid rgb(33, 33, 33);
-    border-radius: 8px;
+    color: ${props => props.isActive ? 'black' : 'initial'};
+    border: ${props => props.isActive ? '1px solid rgba(22, 175, 204, 0.4)' : '1px solid transparent'};
+    border-radius: ${props => props.isActive ? '8px' : 'initial'};
 
     text-align: center;
 
     heigth: 100%;
-    width: 70px;
-    padding: 7px;
 
     &:hover {
-        background-color: rgba(33, 33, 33, 0.9);
+        text-decoration: ${props => props.isActive ? '' : 'underline'};
     }
+    padding: 7px;
 `;
 
 export const BtnCandidat = styled.p`
-    background-color: rgb(33, 33, 33);
-    color: white;
-
-    border: 1px solid rgb(33, 33, 33);
-    border-radius: 8px;
-
+    color: ${props => props.isActive ? 'black' : 'initial'};
+    border: ${props => props.isActive ? '1px solid rgba(22, 175, 204, 0.4)' : '1px solid transparent'};
+    border-radius: ${props => props.isActive ? '8px' : 'initial'};
     text-align: center;
-    
-    heigth: 10%;
-    width: 70px;
-    padding: 7px;
-    margin-left: 5px;
+
+    heigth: 100%;
 
     &:hover {
-        background-color: rgba(33, 33, 33, 0.9);
+        text-decoration: ${props => props.isActive ? '' : 'underline'};
     }
+    padding: 7px;
+    padding: 7px;
+    margin-left: 5px;
 `;
+

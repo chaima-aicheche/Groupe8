@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './ContactForm.css'; 
+import './style.css'; 
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -19,14 +19,17 @@ const ContactForm = () => {
 
   return (
     <div className="form-container">
-      <h1>Contact Us</h1>
+      <div className="form-paragraphe">
+        <p>Get in touch with us today <br />and let's start the conversation!</p>
+        <div></div>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Name:</label>
             <input
               type="text"
               name="name"
+              placeholder="Name"
               value={formData.name}
               onChange={handleChange}
               className="form-input"
@@ -34,10 +37,10 @@ const ContactForm = () => {
             />
           </div>
           <div className="form-col">
-            <label className="form-label">Email:</label>
             <input
               type="email" 
               name="email"
+              placeholder="Email"
               value={formData.email}
               onChange={handleChange}
               className="form-input"
@@ -47,9 +50,9 @@ const ContactForm = () => {
         </div>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Message:</label>
             <textarea
               name="message"
+              placeholder="Message"
               value={formData.message}
               onChange={handleChange}
               className="form-textarea"

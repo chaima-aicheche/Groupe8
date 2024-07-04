@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './RegisterCandidateForm.css'; 
+import './style.css'; 
 
 const RegisterCandidateForm = () => {
   const [formData, setFormData] = useState({
@@ -24,14 +24,17 @@ const RegisterCandidateForm = () => {
 
   return (
     <div className="form-container">
-        <h1>Register as Candidate</h1>
+      <div className="form-paragraphe">
+        <p>Take the first step towards <br />your future career .<br /> Register as a candidate today!</p>
+        <div></div>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Nom :</label>
             <input
               type="text"
               name="nom"
+              placeholder="Nom"
               value={formData.nom}
               onChange={handleChange}
               className="form-input"
@@ -39,10 +42,10 @@ const RegisterCandidateForm = () => {
             />
           </div>
           <div className="form-col">
-            <label className="form-label">Prénom :</label>
             <input
               type="text"
               name="prenom"
+              placeholder="Prénom"
               value={formData.prenom}
               onChange={handleChange}
               className="form-input"
@@ -52,10 +55,10 @@ const RegisterCandidateForm = () => {
         </div>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Adresse :</label>
             <input
               type="text"
               name="adresse"
+              placeholder="Adresse"
               value={formData.adresse}
               onChange={handleChange}
               className="form-input"
@@ -63,10 +66,10 @@ const RegisterCandidateForm = () => {
             />
           </div>
           <div className="form-col">
-            <label className="form-label">Ville :</label>
             <input
               type="text"
               name="ville"
+              placeholder="Ville"
               value={formData.ville}
               onChange={handleChange}
               className="form-input"
@@ -76,10 +79,10 @@ const RegisterCandidateForm = () => {
         </div>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Code postal :</label>
             <input
               type="text"
               name="codepostal"
+              placeholder="Code postal"
               value={formData.codepostal}
               onChange={handleChange}
               className="form-input"
@@ -87,10 +90,10 @@ const RegisterCandidateForm = () => {
             />
           </div>
           <div className="form-col">
-            <label className="form-label">Pays :</label>
             <input
               type="text"
               name="pays"
+              placeholder="Pays"
               value={formData.pays}
               onChange={handleChange}
               className="form-input"
@@ -100,10 +103,10 @@ const RegisterCandidateForm = () => {
         </div>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Email :</label>
             <input
               type="email"
               name="email"
+              placeholder="Email"
               value={formData.email}
               onChange={handleChange}
               className="form-input"
@@ -111,10 +114,10 @@ const RegisterCandidateForm = () => {
             />
           </div>
           <div className="form-col">
-            <label className="form-label">Mot de passe :</label>
             <input
               type="password"
               name="password"
+              placeholder="Mot de passe"
               value={formData.password}
               onChange={handleChange}
               className="form-input"

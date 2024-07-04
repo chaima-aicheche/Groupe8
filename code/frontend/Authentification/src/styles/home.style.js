@@ -12,6 +12,8 @@ export const ContainerHome = styled.section`
     height: 90vh;
     width: 100%;
 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
     background-image: url(${backgroundImage});
     background-size: cover;
     background-position: center;
@@ -94,12 +96,30 @@ export const FormHome = styled.section`
       height: 35%;
 
       input {
-         height: 30%;
-         border-radius: 5px;
+        height: 30%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 3px;
+
+        &::placeholder {
+          padding-left: 10px;
+          color: rgba(0, 0, 0, 0.4);
+          font-style: italic;
+        }
+
+        &:hover {
+          border: 1px solid rgba(0, 0, 0, 0.3);
+        }
       }
 
       a {
         margin-bottom: 15px;
+        color: rgb(22, 175, 204);
+
+        &:hover {
+          color: rgba(22, 175, 204, 0.6);
+          text-decoration: underline;
+        }
       }
     }
 
@@ -112,6 +132,16 @@ export const FormHome = styled.section`
           height: 80%;
           width: 100%;
           border-radius: 5px;
+          border: 0;
+
+          background-color: rgb(22, 175, 204);
+          color: white;
+
+          &:hover {
+            background-color: rgba(22, 175, 204, 0.6);
+            border: 2px solid rgba(22, 175, 204, 0.6);
+            color: black;
+          }
       }
     }
 
@@ -125,5 +155,14 @@ export const FormHome = styled.section`
       align-items: center;
 
       height: 10%;
+
+      a {
+        color: rgb(22, 175, 204);
+        
+        &:hover {
+          color: rgba(22, 175, 204, 0.6);
+          text-decoration: underline;
+        }
+      }
     }
 `;

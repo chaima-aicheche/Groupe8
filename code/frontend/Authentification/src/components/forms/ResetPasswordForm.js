@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './ResetPasswordForm.css'; 
+import './style.css'; 
 
 const ResetPasswordForm = () => {
   const [formData, setFormData] = useState({
@@ -19,43 +19,49 @@ const ResetPasswordForm = () => {
 
   return (
     <div className="form-container">
-        <h1>Reset Password</h1>
+      <div className="form-paragraphe">
+        <p>Forgot your password? Reset it here!</p>
+        <div></div>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Email :</label>
             <input
               type="email"
               name="email"
+              placeholder="Email"
               value={formData.email}
               onChange={handleChange}
               className="form-input"
+              autoComplete="email" 
               required
             />
           </div>
         </div>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">New Password :</label>
             <input
               type="password"
               name="newPassword"
+              placeholder="New Password"
               value={formData.newPassword}
               onChange={handleChange}
               className="form-input"
+              autoComplete="new-password" 
               required
             />
           </div>
         </div>
         <div className="form-row">
           <div className="form-col">
-            <label className="form-label">Confirm New Password :</label>
             <input
               type="password"
               name="confirmNewPassword"
+              placeholder="Confirm New Password"
               value={formData.confirmNewPassword}
               onChange={handleChange}
               className="form-input"
+              autoComplete="new-password" 
               required
             />
           </div>
