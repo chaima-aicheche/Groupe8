@@ -1,7 +1,11 @@
 code/frontend/Authentification/node_modules
 code/frontend/Authentification/package-lock.json
+
+code/frontend/Formation/node_modules
+code/frontend/Formation/package-lock.json
+
 .DS_Store
 script/pid/pid.txt
 
 code/frontend/App/node_modules
-code/frontend/App/package-lock.json
+code/frontend/App/package-lock.jsongit 
