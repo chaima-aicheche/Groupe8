@@ -1,3 +1,4 @@
+// src/components/Interviews.js
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import Planning from './Planning';

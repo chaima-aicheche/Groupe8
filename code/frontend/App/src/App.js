@@ -31,7 +31,7 @@ const App = () => {
               <Route path="articles" element={<TrainingArticles />} />
             </Route>
           </Routes>
-        </div>
+        </div> 
       </div> 
     </Router>
   );
