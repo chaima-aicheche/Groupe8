@@ -1,0 +1,18 @@
+[
+    {
+      "id": "1",
+      "userId": "1",
+      "title": "Frontend Developer",
+      "company": "Tech Corp",
+      "date": "2023-06-01",
+      "status": "Pending"
+    },
+    {
+      "id": "2",
+      "userId": "1",
+      "title": "Backend Developer",
+      "company": "Web Solutions",
+      "date": "2023-05-15",
+      "status": "Accepted"
+    }
+  ]

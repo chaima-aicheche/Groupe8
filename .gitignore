@@ -8,4 +8,5 @@ code/frontend/Formation/package-lock.json
 script/pid/pid.txt
 
 code/frontend/App/node_modules
-code/frontend/App/package-lock.jsongit 
+code/frontend/App/package-lock.json
+code/frontend/App/package.json
