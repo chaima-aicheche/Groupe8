@@ -7,13 +7,12 @@ const LatestApplications = () => {
     return (
         <div className="applications-container">
             <h3>Dernières Candidatures</h3>
-            <ul>
+            <ul className='applications-list'>
                 {LatestApplicationsData.slice(0, 5).map(app => (
-                    <li key={app.id}>
-                        <p>{app.title} - {app.company}</p>
-                        <p>{app.date}</p>
+                    <a href=''><li key={app.id}>
+                        <p>{app.title} - {app.company} - {app.date}</p>
                         <p>{app.status}</p>
-                    </li>
+                    </li></a>
                 ))}
             </ul>
         </div>

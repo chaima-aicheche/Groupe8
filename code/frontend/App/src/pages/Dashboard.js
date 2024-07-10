@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CandidateDashboard from '../components/CandidateDashboard';
 import RecruiterDashboard from '../components/RecruiterDashboard';
-import '../styles/Dashboard.css';
+import '../styles/Dashboard.css'
 
 import userData from '../data/user.json';
 

@@ -6,13 +6,5 @@
       "image": "/images/react.png",
       "content": "This is a detailed guide on React...",
       "date": "2023-07-01"
-    },
-    {
-      "id": "2",
-      "title": "Advanced Node.js",
-      "description": "Master Node.js for backend development.",
-      "image": "/images/nodejs.png",
-      "content": "This is an advanced guide on Node.js...",
-      "date": "2023-06-25"
     }
   ]

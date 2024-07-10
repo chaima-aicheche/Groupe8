@@ -1,19 +1,41 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Doughnut} from 'react-chartjs-2';
 
-const StatsChart = ({ data }) => {
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+
+// Register the required components for Chart.js
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+import statData from '../data/cards.json';
+
+const StatsChart = () => {
     const chartData = {
         labels: ['Candidatées', 'Refusées', 'Acceptées'],
         datasets: [
             {
                 label: 'Statistiques de Candidature',
-                data: [data.appliedOffers, data.refusedOffers, data.acceptedOffers],
-                backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)']
+                data: [statData.appliedOffers, statData.acceptedOffers, statData.refusedOffers],
+                backgroundColor: ['rgba(169, 169, 169, 0.95)', 'rgba(169, 169, 169, 0.5)', 'rgba(169, 169, 169, 0.3)']
             }
         ]
     };
 
-    return <Bar data={chartData} />;
+    const options = {
+        plugins: {
+          legend: {
+            display: true,
+            position: 'right',
+            labels: {
+              boxWidth: 20,
+              padding: 20
+            }
+          }
+        }
+      };
+
+    console.log(chartData);
+
+    return <Doughnut data={chartData} options={options} />;
 };
 
 export default StatsChart;
