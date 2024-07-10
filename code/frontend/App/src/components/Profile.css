@@ -9,6 +9,7 @@
 .profile-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding: 20px;
   background-color: #f5f5f5;
@@ -102,7 +103,23 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+.profile-cv .dropzone {
+  padding: 20px;
+  border: 2px dashed #007bff;
+  border-radius: 4px;
   background-color: #f9f9f9;
+  text-align: center;
+  cursor: pointer;
+}
+
+.uploaded-cv {
+  margin-top: 20px;
+}
+
+.uploaded-cv p {
+  margin-bottom: 5px;
 }
 
 .profile-submit-button {

@@ -1,16 +1,17 @@
+import './Profile.css';
 import React, { useState } from 'react';
-import './Profile.css'
+import { useDropzone } from 'react-dropzone';
 
 // Exemple de données de profil à récupérer depuis la base de données
 const profileData = {
-  nom: 'Doe',
-  prenom: 'John',
-  aPropos: 'Senior Developer at XYZ Corp.',
-  email: 'johndoe@example.com',
+  nom: 'Test',
+  prenom: 'testt',
+  aPropos: 'Senior Developer  .',
+  email: 'test@example.com',
   genre: 'Homme',
   codePostal: '13002',
   ville: 'Marseille',
-  dateNaissance: '1980-01-01', // format ISO pour date picker
+  dateNaissance: '1999-01-01', // format ISO pour date picker
   pays: 'France',
   numeroTelephone: '0123456789'
 };
@@ -20,6 +21,7 @@ const Profile = () => {
   const [formData, setFormData] = useState(profileData);
   const [profilePhoto, setProfilePhoto] = useState('');
   const [activeTab, setActiveTab] = useState('aPropos');
+  const [uploadedCV, setUploadedCV] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -45,6 +47,13 @@ const Profile = () => {
     }
   };
 
+  const onDrop = (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    if (file) {
+      setUploadedCV(file);
+    }
+  };
+
   const UserInfoSection = ({ label, value, type, handleChange }) => (
     <div className="profile-section">
       <p className="profile-label">{label}</p>
@@ -61,6 +70,9 @@ const Profile = () => {
       )}
     </div>
   );
+
+  // Utilisation de useDropzone pour gérer le Dropzone
+  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: '.pdf' });
 
   return (
     <div className="profile">
@@ -108,68 +120,77 @@ const Profile = () => {
 
       <div className="profile-body">
         {activeTab === 'aPropos' ? (
-          <UserInfoSection
-            label="A propos de moi"
-            value={{ name: 'aPropos', value: formData.aPropos }}
-            handleChange={handleChange}
-          />
+          <>
+            <UserInfoSection
+              label="A propos de moi"
+              value={{ name: 'aPropos', value: formData.aPropos }}
+              handleChange={handleChange}
+            />
+            <UserInfoSection
+              label="Email"
+              value={{ name: 'email', value: formData.email }}
+              type="email"
+              handleChange={handleChange}
+            />
+            <div className="profile-section">
+              <p className="profile-label">Genre</p>
+              {editMode ? (
+                <select
+                  name="genre"
+                  value={formData.genre}
+                  onChange={handleChange}
+                  className="profile-input"
+                >
+                  <option value="Homme">Homme</option>
+                  <option value="Femme">Femme</option>
+                </select>
+              ) : (
+                <p className="profile-value">{formData.genre}</p>
+              )}
+            </div>
+            <UserInfoSection
+              label="Code postal"
+              value={{ name: 'codePostal', value: formData.codePostal }}
+              handleChange={handleChange}
+            />
+            <UserInfoSection
+              label="Date de naissance"
+              value={{ name: 'dateNaissance', value: formData.dateNaissance }}
+              type="date"
+              handleChange={handleChange}
+            />
+            <UserInfoSection
+              label="Ville"
+              value={{ name: 'ville', value: formData.ville }}
+              handleChange={handleChange}
+            />
+            <UserInfoSection
+              label="Numéro de téléphone"
+              value={{ name: 'numeroTelephone', value: formData.numeroTelephone }}
+              handleChange={handleChange}
+            />
+            <UserInfoSection
+              label="Pays"
+              value={{ name: 'pays', value: formData.pays }}
+              handleChange={handleChange}
+            />
+          </>
         ) : (
-          <div className="profile-section">
-            <p className="profile-label">Mon CV</p>
-            <a href="https://www.moo.com/" target="_blank" rel="noopener noreferrer">
-              Moo cv
-            </a>
+          <div className="profile-cv">
+            <div {...getRootProps()} className="dropzone">
+              <input {...getInputProps()} />
+              <p>Déposez votre CV ici, ou cliquez pour sélectionner un fichier PDF</p>
+            </div>
+            {uploadedCV && (
+              <div className="uploaded-cv">
+                <p>CV téléchargé : {uploadedCV.name}</p>
+                <a href={URL.createObjectURL(uploadedCV)} target="_blank" rel="noopener noreferrer">
+                  Voir le CV
+                </a>
+              </div>
+            )}
           </div>
         )}
-
-        <UserInfoSection
-          label="Email"
-          value={{ name: 'email', value: formData.email }}
-          type="email"
-          handleChange={handleChange}
-        />
-        <div className="profile-section">
-          <p className="profile-label">Genre</p>
-          {editMode ? (
-            <select
-              name="genre"
-              value={formData.genre}
-              onChange={handleChange}
-              className="profile-input"
-            >
-              <option value="Homme">Homme</option>
-              <option value="Femme">Femme</option>
-            </select>
-          ) : (
-            <p className="profile-value">{formData.genre}</p>
-          )}
-        </div>
-        <UserInfoSection
-          label="Code postal"
-          value={{ name: 'codePostal', value: formData.codePostal }}
-          handleChange={handleChange}
-        />
-        <UserInfoSection
-          label="Date de naissance"
-          value={{ name: 'dateNaissance', value: formData.dateNaissance }}
-          type="date"
-          handleChange={handleChange}
-        />
-        <UserInfoSection
-          label="Ville"
-          value={{ name: 'ville', value: formData.ville }}
-          handleChange={handleChange}
-        />
-        <UserInfoSection
-          label="Numéro de téléphone"
-          value={{ name: 'numeroTelephone', value: formData.numeroTelephone }}
-          handleChange={handleChange}
-        />
-        <UserInfoSection
-          label="Pays"
-          value={{ name: 'pays', value: formData.pays }}
-          handleChange={handleChange}
-        />
       </div>
 
       {editMode && (
