@@ -1,6 +1,8 @@
 import './Profile.css';
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import 'react-phone-number-input/style.css'; 
+import PhoneInput from 'react-phone-number-input';
 
 // Exemple de données de profil à récupérer depuis la base de données
 const profileData = {
@@ -164,11 +166,19 @@ const Profile = () => {
               value={{ name: 'ville', value: formData.ville }}
               handleChange={handleChange}
             />
-            <UserInfoSection
-              label="Numéro de téléphone"
-              value={{ name: 'numeroTelephone', value: formData.numeroTelephone }}
-              handleChange={handleChange}
-            />
+           <div className="profile-section">
+              <p className="profile-label">Numéro de téléphone</p>
+              {editMode ? (
+                <PhoneInput
+                  placeholder="Enter phone number"
+                  value={formData.numeroTelephone}
+                  onChange={(value) => setFormData({ ...formData, numeroTelephone: value })}
+                  className="profile-input"
+                />
+              ) : (
+                <p className="profile-value">{formData.numeroTelephone}</p>
+              )}
+            </div>
             <UserInfoSection
               label="Pays"
               value={{ name: 'pays', value: formData.pays }}
