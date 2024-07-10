@@ -12,11 +12,13 @@ const Profile = () => {
     ville: 'Marseille',
     dateNaissance: '01/01/1980',
     pays: 'France',
+    numeroTelephone: '0123456789'
   };
 
   // State pour gérer l'édition du profil
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState(profileData);
+  const [profilePhoto, setProfilePhoto] = useState('');
 
   // Handler pour la soumission du formulaire de modification
   const handleSubmit = (event) => {
@@ -33,8 +35,6 @@ const Profile = () => {
   };
 
   // Handler pour la gestion de la photo de profil
-  const [profilePhoto, setProfilePhoto] = useState('');
-
   const handleFileChange = (event) => {
     const file = event.target.files[0];
 
@@ -47,149 +47,114 @@ const Profile = () => {
     }
   };
 
+  // Component for each user information section
+  const UserInfoSection = ({ label, value, editMode, handleChange }) => {
+    return (
+      <div className="profile-section">
+        <p className="profile-label">{label}</p>
+        {editMode ? (
+          <input
+            type={value.type || 'text'} // Set input type based on value type
+            name={value.name}
+            value={value.value}
+            onChange={handleChange}
+          />
+        ) : (
+          <p className="profile-value">{value.value}</p>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="profile">
-      <h1>Mon profil</h1>
-      <button onClick={() => setEditMode(!editMode)}>
-        {editMode ? 'Annuler' : 'Modifier'}
-      </button>
+      <header className="profile-header">
+        <h1>Mon profil</h1>
+        <button onClick={() => setEditMode(!editMode)}>
+          {editMode ? 'Annuler' : 'Modifier'}
+        </button>
+      </header>
 
-      <div className="profile-info">
-        <div className="profile-section">
-          <h2>Nom & prénom</h2>
-          {editMode ? (
-            <input
-              type="text"
-              name="nom"
-              value={formData.nom}
-              onChange={handleChange}
-            />
-          ) : (
-            <p>{formData.nom} {formData.prenom}</p>
-          )}
+      <div className="profile-body">
+        <div className="profile-info">
+          <UserInfoSection
+            label="Nom & prénom"
+            value={{ name: 'nom', value: `${formData.nom} ${formData.prenom}` }}
+            editMode={editMode}
+            handleChange={handleChange}
+          />
+          <UserInfoSection
+            label="A propos de moi"
+            value={{ name: 'aPropos', value: formData.aPropos }}
+            editMode={editMode}
+            handleChange={handleChange}
+          />
+          <UserInfoSection
+            label="Email"
+            value={{ name: 'email', value: formData.email }}
+            editMode={editMode}
+            handleChange={handleChange}
+          />
+          <UserInfoSection
+            label="Genre"
+            value={{ name: 'genre', value: formData.genre }}
+            editMode={editMode}
+            handleChange={handleChange}
+          />
+          <UserInfoSection
+            label="Code postal"
+            value={{ name: 'codePostal', value: formData.codePostal }}
+            editMode={editMode}
+            handleChange={handleChange}
+          />
+          <UserInfoSection
+            label="Date de naissance"
+            value={{ name: 'dateNaissance', value: formData.dateNaissance }}
+            editMode={editMode}
+            handleChange={handleChange}
+          />
+          <UserInfoSection
+            label="Ville"
+            value={{ name: 'ville', value: formData.ville }}
+            editMode={editMode}
+            handleChange={handleChange}
+          />
+          <UserInfoSection
+            label="Pays"
+            value={{ name: 'pays', value: formData.pays }}
+            editMode={editMode}
+            handleChange={handleChange}
+          />
+          <UserInfoSection
+            label="Numéro de téléphone"
+            value={{ name: 'numeroTelephone', value: formData.numeroTelephone }}
+            editMode={editMode}
+            handleChange={handleChange}
+          />
         </div>
 
-        <div className="profile-section">
-          <h2>A propos de moi</h2>
-          {editMode ? (
-            <textarea
-              name="aPropos"
-              value={formData.aPropos}
-              onChange={handleChange}
-            />
-          ) : (
-            <p>{formData.aPropos}</p>
-          )}
-        </div>
-
-        <div className="profile-section">
-          <h2>Email</h2>
-          {editMode ? (
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          ) : (
-            <p>{formData.email}</p>
-          )}
-        </div>
-
-        <div className="profile-section">
-          <h2>Genre</h2>
-          {editMode ? (
-            <select
-              name="genre"
-              value={formData.genre}
-              onChange={handleChange}
-            >
-              <option value="Homme">Homme</option>
-              <option value="Femme">Femme</option>
-            </select>
-          ) : (
-            <p>{formData.genre}</p>
-          )}
-        </div>
-
-        <div className="profile-section">
-          <h2>Code postal</h2>
-          {editMode ? (
-            <input
-              type="text"
-              name="codePostal"
-              value={formData.codePostal}
-              onChange={handleChange}
-            />
-          ) : (
-            <p>{formData.codePostal}</p>
-          )}
-        </div>
-
-        <div className="profile-section">
-          <h2>Date de naissance</h2>
-          {editMode ? (
-            <input
-              type="text"
-              name="dateNaissance"
-              value={formData.dateNaissance}
-              onChange={handleChange}
-            />
-          ) : (
-            <p>{formData.dateNaissance}</p>
-          )}
-        </div>
-
-        <div className="profile-section">
-          <h2>Ville</h2>
-          {editMode ? (
-            <input
-              type="text"
-              name="ville"
-              value={formData.ville}
-              onChange={handleChange}
-            />
-          ) : (
-            <p>{formData.ville}</p>
-          )}
-        </div>
-
-        <div className="profile-section">
-          <h2>Pays</h2>
-          {editMode ? (
-            <input
-              type="text"
-              name="pays"
-              value={formData.pays}
-              onChange={handleChange}
-            />
-          ) : (
-            <p>{formData.pays}</p>
-          )}
-        </div>
-      </div>
-
-      {/* Affichage de la photo de profil */}
-      {editMode ? (
         <div className="profile-photo">
           {profilePhoto ? (
             <img src={profilePhoto} alt="Photo de profil" />
           ) : (
-            <label htmlFor="profilePhotoInput">
-              Sélectionner une photo
-              <input
-                type="file"
-                id="profilePhotoInput"
-                onChange={handleFileChange}
-              />
-            </label>
+            editMode && (
+              <label htmlFor="profilePhotoInput">
+                Sélectionner une photo
+                <input
+                  type="file"
+                  id="profilePhotoInput"
+                  onChange={handleFileChange}
+                />
+              </label>
+            )
           )}
         </div>
-      ) : null}
+      </div>
 
-      {/* Bouton pour soumettre le formulaire en mode édition */}
       {editMode && (
-        <button type="submit" onClick={handleSubmit}>Enregistrer</button>
+        <button type="submit" className="profile-submit-button" onClick={handleSubmit}>
+          Enregistrer
+        </button>
       )}
     </div>
   );
