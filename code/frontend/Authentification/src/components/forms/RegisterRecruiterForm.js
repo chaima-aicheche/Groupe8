@@ -5,7 +5,8 @@ const RegisterRecruiterForm = () => {
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
-    entreprise: '',
+    raisonSociale: '',
+    categorie: '',
     num: '',
     adresse: '',
     ville: '',
@@ -28,9 +29,34 @@ const RegisterRecruiterForm = () => {
     <div className="form-container">
       <div className="form-paragraphe">
         <p>Unlock your potential to find the best talent.<br />Register as a recruiter now!</p>
-        <div></div>
       </div>
       <form onSubmit={handleSubmit}>
+        <div className="form-row">
+          <div className="form-col">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              className="form-input"
+              autoComplete="email" 
+              required
+            />
+          </div>
+          <div className="form-col">
+            <input
+              type="password"
+              name="password"
+              placeholder="Mot de passe"
+              value={formData.password}
+              onChange={handleChange}
+              className="form-input"
+              autoComplete="current-password" 
+              required
+            />
+          </div>
+        </div>
         <div className="form-row">
           <div className="form-col">
             <input
@@ -61,9 +87,9 @@ const RegisterRecruiterForm = () => {
           <div className="form-col">
             <input
               type="text"
-              name="entreprise"
-              placeholder="Entreprise"
-              value={formData.entreprise}
+              name="raisonSociale"
+              placeholder="Raison sociale"
+              value={formData.raisonSociale}
               onChange={handleChange}
               className="form-input"
               autoComplete="organization" 
@@ -85,6 +111,7 @@ const RegisterRecruiterForm = () => {
         </div>
         <div className="form-row">
           <div className="form-col">
+            <div className="small-text">Siège Social</div>
             <input
               type="text"
               name="adresse"
@@ -131,32 +158,6 @@ const RegisterRecruiterForm = () => {
               onChange={handleChange}
               className="form-input"
               autoComplete="country" 
-              required
-            />
-          </div>
-        </div>
-        <div className="form-row">
-          <div className="form-col">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              className="form-input"
-              autoComplete="email" 
-              required
-            />
-          </div>
-          <div className="form-col">
-            <input
-              type="password"
-              name="password"
-              placeholder="Mot de passe"
-              value={formData.password}
-              onChange={handleChange}
-              className="form-input"
-              autoComplete="current-password" 
               required
             />
           </div>
