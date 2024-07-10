@@ -1,4 +1,4 @@
-.home, .profile, .job-offers, .interviews, .planning, .articles, .training, .games, .training-articles {
+/* .home, .profile, .job-offers, .interviews, .planning, .articles, .training, .games, .training-articles {
     background-color: #ecf0f1;
     padding: 20px;
     border-radius: 5px;
@@ -26,4 +26,8 @@
   .interviews nav ul li a:hover, .training nav ul li a:hover {
     text-decoration: underline;
   }
-  
+   */
+
+.dashboard-container{
+  padding: 20px;
+}
