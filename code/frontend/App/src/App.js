@@ -11,6 +11,7 @@ import Training from './components/Training';
 import Games from './components/Games';
 import TrainingArticles from './components/TrainingArticles';
 import './styles/App.css';
+import Dashboard from './pages/Dashboard';
 
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
         <Sidebar />
         <div className="content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/job-offers" element={<JobOffers />} />
             <Route path="/interviews" element={<Interviews />}>
