@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Profile.css'
 
 const Profile = () => {
   // Exemple de données de profil à récupérer depuis la base de données
