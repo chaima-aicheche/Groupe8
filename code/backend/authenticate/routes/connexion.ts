@@ -2,23 +2,22 @@ import {Request, Response} from "express";
 // @ts-ignore
 import express from 'express';
 // @ts-ignore
+import ServiceConnexion from '../service/connexion.service';
 
 
 const router = express.Router();
+const service = new ServiceConnexion();
 
 
 
-router.get("/toto", async (req: Request, res: Response) => {
-    console.log("totoooooo");
-});
-
-
-router.post("/tata", (req: Request, res: Response) => {
-    console.log("tataaaaaa");
-    console.log(req.body.message);
-    res.status(66622).send({
-        message: "Requête reçue avec succès."
-    })
+router.post("/connect", async (req: Request, res: Response) => {
+    try{
+        const response = await service.connect(req.body);
+        res.status(200).send(response);
+    }
+    catch (e){
+        res.status(500).send({message: "Une erreur technique a été rencontrée."});
+    }
 });
 
 
