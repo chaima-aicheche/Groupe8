@@ -5,6 +5,7 @@ import {Request, Response} from "express";
 import cors from 'cors';
 import register from './routes/register';
 import connexion from './routes/connexion';
+import reset from './routes/reset';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/register", register);
 app.use("/connexion", connexion);
+app.use("/reset", reset);
 
 
 
