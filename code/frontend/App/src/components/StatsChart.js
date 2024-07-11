@@ -10,7 +10,7 @@ import statData from '../data/cards.json';
 
 const StatsChart = () => {
     const chartData = {
-        labels: ['offres Candidatées', 'offres Acceptées', 'offres Refusées'],
+        // labels: ['offres Candidatées', 'offres Acceptées', 'offres Refusées'],
         datasets: [
             {
                 label: 'Statistiques de Candidature',
