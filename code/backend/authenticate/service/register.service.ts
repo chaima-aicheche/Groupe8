@@ -23,23 +23,41 @@ class ServiceRegister
      * @param email
      * @param password
      * @param type
-     * @param data
      * @constructor
      */
     async InsertUserInDb(email : string, password : string, type : string)
     {
-        // 8 char, 1 chiffre, 1 maj, 1 char special
-        if(email != null && email != "" && password != null && password != "" && this.IsPasswordOk(password) && type != null && type != "")
+        if(this.IsEmailOk(email) && this.IsPasswordOk(password) && type != null && type != "")
             await this.requeteModel.InsertUserInDb(email, await this.HashPassword(password), type);
     }
 
-    async HashPassword(password: string)
+    private async HashPassword(password: string)
     {
         return await bcrypt.hash(password, 10);
     }
 
-    private IsPasswordOk(password: string) {
-        return false;
+    /**
+     * Check if the email has the good format
+     * @param email
+     * @constructor
+     * @private
+     */
+    private IsEmailOk(email : string)
+    {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return email != null && email != "" && emailRegex.test(email);
+    }
+
+    /**
+     * Check if the password has 8 char, 1 number, 1 upper case char, 1 lower case char and 1 special char
+     * @param password
+     * @constructor
+     * @private
+     */
+    private IsPasswordOk(password: string)
+    {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return password != null && password != "" && passwordRegex.test(password);
     }
 }
 

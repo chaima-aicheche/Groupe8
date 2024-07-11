@@ -10,7 +10,7 @@ class RegisterModel
         try
         {
             const result = await pool.query(query, values);
-            return result.rows.count() > 0;
+            return result.rows.length > 0;
         }
         catch(error)
         {
@@ -22,10 +22,18 @@ class RegisterModel
     async InsertUserInDb(email : string, password : string, role : string)
     {
         const query = 'INSERT INTO credentials ("email", "password", "role") values ($1, $2, $3)';
-        const values : string[] = [email, password, role];
-        const result = await pool.query(query, values);
+        const values: string[] = [email, password, role];
 
-        return result.result;
+        try
+        {
+            const result = await pool.query(query, values);
+            return result.rows;
+        }
+        catch(error)
+        {
+            console.error("", error);
+            throw error;
+        }
     }
 }
 
