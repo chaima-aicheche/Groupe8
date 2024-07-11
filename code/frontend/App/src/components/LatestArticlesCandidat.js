@@ -1,22 +1,21 @@
 import React from 'react';
 import ArticlesData from '../data/articles.json';
 
-const LatestArticles = () => {
+const LatestArticlesDatas = () => {
+    console.log(ArticlesData);
     return (
-        <div className="articles-container">
-            <h3>Derniers Articles Publiés</h3>
-            <ul>
-                {ArticlesData.map(article => (
-                    <li key={article.id}>
-                        <img src={article.image} alt={article.title} />
-                        <h4>{article.title}</h4>
-                        <p>{article.description}</p>
-                        <button onClick={() => window.location.href=`/articles/${article.id}`}>Lire plus</button>
-                    </li>
-                ))}
-            </ul>
+        <div className="ArticlesData-container">
+            <h4>Derniers ArticlesDatas Publiés</h4>
+            <div className='article-container'>
+                <img src={ArticlesData.image} />
+                <div key={ArticlesData.id} className='article-info'>
+                    <h5>{ArticlesData.title}</h5>
+                    <p>{ArticlesData.description}</p>
+                    <button key={ArticlesData.id}>Lire plus</button>
+                </div>
+            </div>
         </div>
     );
 };
 
-export default LatestArticles;
+export default LatestArticlesDatas;

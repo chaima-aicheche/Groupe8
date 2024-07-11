@@ -52,13 +52,34 @@
   margin-bottom: 50px;
 }
 
-canvas{
-  width: 200px !important;
-  height: 200px !important;
+.stats > canvas:nth-child(2){
+  padding: 0;
 }
 
 .chart-articles{
   display: flex;
-  justify-content: space-around;
-  
+  justify-content: space-between;
+  padding-right: 15%;
+}
+
+.applications-list{
+  font-size: 0.8em;
+  color: #5271ff;
+}
+
+.article-container img{
+  width: 120px;
+  height: 90px;
+}
+
+.article-container{
+  display: flex;
+}
+
+.article-info{
+  margin-left: 15px;
+}
+
+.stats h4{
+  margin-bottom: -40px;
 }
