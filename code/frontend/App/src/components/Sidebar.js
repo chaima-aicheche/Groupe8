@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Sidebar.css';
-import '../components/Games';
+import './Quiz';
 
 const Sidebar = () => {
   return (
@@ -12,7 +12,10 @@ const Sidebar = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to="/profile">Profile Candidat</Link> 
+          </li>
+          <li>
+            <Link to="/recruiter-profile">Profile Recruteur</Link>
           </li>
           <li>
             <Link to="/training">Training</Link>
@@ -21,7 +24,7 @@ const Sidebar = () => {
                 <Link to="/training/articles">Articles</Link>
               </li>
               <li>
-                <Link to="/training/games">Games</Link>
+                <Link to="/training/quiz">Quizz</Link>
               </li>
             </ul>
           </li>

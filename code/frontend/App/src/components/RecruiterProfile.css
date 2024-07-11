@@ -1,0 +1,80 @@
+/* RecruiterProfile.css */
+
+.profile {
+    padding: 20px;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .profile-header h1 {
+    color: #2c3e50;
+  }
+  
+  .profile-edit-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .profile-edit-button:hover {
+    background-color: #2980b9;
+  }
+  
+  .profile-body {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-section {
+    margin-bottom: 20px;
+  }
+  
+  .profile-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .profile-input,
+  .profile-textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+  }
+  
+  .profile-input {
+    height: 40px;
+  }
+  
+  .profile-textarea {
+    height: 80px;
+  }
+  
+  .profile-value {
+    margin-top: 5px;
+  }
+  
+  .profile-submit-button {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .profile-submit-button:hover {
+    background-color: #27ae60;
+  }
+  

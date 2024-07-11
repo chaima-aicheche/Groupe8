@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Articles from './Articles';
-import Games from './Games';
+import Quiz from './Quiz';
 
 const Training = () => {
   return (
@@ -12,13 +12,13 @@ const Training = () => {
             <a href="/training/articles">Articles</a>
           </li>
           <li>
-            <a href="/training/games">Games</a>
+            <a href="/training/quiz">Quiz</a>
           </li>
         </ul>
       </nav>
       <Routes>
         <Route path="articles" element={<Articles />} />
-        <Route path="games" element={<Games />} />
+        <Route path="quiz" element={<Quiz />} />
       </Routes>
     </div>
   );

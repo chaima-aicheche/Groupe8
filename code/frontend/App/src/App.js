@@ -7,8 +7,9 @@ import JobOffers from './components/JobOffers';
 import Interviews from './components/Interviews';
 import Planning from './components/Planning';
 import Articles from './components/Articles';
+import RecruiterProfile from './components/RecruiterProfile';
 import Training from './components/Training';
-import Games from './components/Games';
+import Quiz from './components/Quiz';
 import TrainingArticles from './components/TrainingArticles';
 import './styles/App.css';
 
@@ -21,18 +22,17 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/recruiter-profile" element={<RecruiterProfile />} />
             <Route path="/job-offers" element={<JobOffers />} />
-            <Route path="/interviews" element={<Interviews />}>
-              <Route path="planning" element={<Planning />} />
-              <Route path="articles" element={<Articles />} />
-            </Route>
-            <Route path="/training" element={<Training />}>
-              <Route path="games" element={<Games />} />
-              <Route path="articles" element={<TrainingArticles />} />
-            </Route>
+            <Route path="/interviews" element={<Interviews />} />
+            <Route path="/interviews/planning" element={<Planning />} />
+            <Route path="/interviews/articles" element={<Articles />} />
+            <Route path="/training" element={<Training />} />
+            <Route path="/training/quiz" element={<Quiz />} />
+            <Route path="/training/articles" element={<TrainingArticles />} />
           </Routes>
-        </div> 
-      </div> 
+        </div>
+      </div>
     </Router>
   );
 };
