@@ -55,15 +55,18 @@ class ServiceRegister
         let isPasswordOk = this.IsPasswordOk(password);
         let isTypeOk = type != null && type != "";
 
-        if(isPasswordOk && isTypeOk)
+        response = await this.IsUserInDb(email)
+
+        if(response.code == 200)
         {
-            await this.requeteModel.InsertUserInDb(email, await this.HashPassword(password), type);
-            response = { code: 200, message: "Inscription terminée." };
+            if (isPasswordOk && isTypeOk) {
+                await this.requeteModel.InsertUserInDb(email, await this.HashPassword(password), type);
+                response = {code: 200, message: "Inscription terminée."};
+            } else if (isPasswordOk == false)
+                response = {code: 400, message: "Le mot de passe n'est pas au bon format."}
+            else if (isTypeOk == false)
+                response = {code: 400, message: "Le role n'est pas spécifié."}
         }
-        else if(isPasswordOk == false)
-            response = { code: 400, message: "Le mot de passe n'est pas au bon format." }
-        else if(isTypeOk == false)
-            response = { code: 400, message: "Le role n'est pas spécifié." }
 
         return response;
     }
