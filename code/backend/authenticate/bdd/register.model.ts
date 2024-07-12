@@ -2,6 +2,11 @@ import pool from '../bdd/pool.config';
 
 class RegisterModel
 {
+    /**
+     * Check if the user is already in the DB
+     * @param email
+     * @constructor
+     */
     async IsUserInDb(email : string)
     {
         const query = 'SELECT * FROM credentials WHERE "email" = $1';
@@ -19,6 +24,13 @@ class RegisterModel
         }
     }
 
+    /**
+     * Insert the user's data in the credential DB
+     * @param email
+     * @param password
+     * @param role
+     * @constructor
+     */
     async InsertUserInDb(email : string, password : string, role : string)
     {
         const query = 'INSERT INTO credentials ("email", "password", "role") values ($1, $2, $3)';
