@@ -90,7 +90,7 @@ class ServiceReset {
             secure: false,
             auth: {
                 user: 'fabien.ricca@gmail.com', // Adresse email de l'expéditeur
-                pass: 'ldzx nuno fudt tqfu'     // Mot de passe de l'expéditeur
+                pass: ''     // Mot de passe de l'expéditeur
             }
         });
 
