@@ -8,42 +8,30 @@ import serviceRegister from '../service/register.service';
 const service = new serviceRegister();
 const router = express.Router();
 
+// router.get("/titi", async (req: Request, res: Response) => {
+//     console.log("titiiiiiiiii");
+// });
 
-router.get("/titi", async (req: Request, res: Response) => {
-    console.log("titiiiiiiiii");
-});
-
-
-router.post("/candidat", (req: Request, res: Response) =>
+router.post("/candidat", async (req: Request, res: Response) =>
 {
-    service.InsertUserInDb(req.body.email, req.body.password, req.body.nom, req.body.prenom, req.body.num_telephone, req.body.adresse, req.body.code_postal, req.body.ville, req.body.pays, req.body.genre, req.body.cv);
-
-    res.status(555).send
-    ({
-        message: "Requête reçue avec succès."
-    })
+    try{
+        const response = await service.InsertUserInDb(req.body.email, req.body.password, "candidat");
+        res.status(200).send(response);
+    }
+    catch (e){
+        res.status(500).send({message: "Une erreur technique a été rencontrée."});
+    }
 });
 
-router.post("/recruteur", (req: Request, res: Response) =>
+router.post("/recruteur", async (req: Request, res: Response) =>
 {
-    service.InsertUserInDb(req.body.email, req.body.password, req.body.raison_sociale, req.body.num_telephone, req.body.adresse, req.body.code_postal, req.body.ville, req.body.pays, req.body.categorie);
-
-    res.status(555).send
-    ({
-        message: "Requête reçue avec succès."
-    })
+    try{
+        const response = await service.InsertUserInDb(req.body.email, req.body.password, "recruteur");
+        res.status(200).send(response);
+    }
+    catch (e){
+        res.status(500).send({message: "Une erreur technique a été rencontrée."});
+    }
 });
-
-router.post("/formateur", (req: Request, res: Response) =>
-{
-    service.InsertUserInDb(req.body.email, req.body.password, req.body.nom, req.body.prenom);
-
-    res.status(555).send
-    ({
-        message: "Requête reçue avec succès."
-    })
-});
-
-
 
 export default router;

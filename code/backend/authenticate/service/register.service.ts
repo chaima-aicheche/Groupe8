@@ -10,12 +10,35 @@ class ServiceRegister
 
     /**
      * Check if the user is already registered in the DB from his email
-     * @param email :: The email of the user
+     * @param email
      * @return True if the user is already in the database, False is he isn't
      */
     async IsUserInDb(email : string)
     {
-        await this.requeteModel.IsUserInDb(email);
+        let response: { code: number; message: string; };
+
+        if(this.IsEmailOk(email.trim()))
+        {
+            if(await this.requeteModel.IsUserInDb(email))
+                response = {
+                    code: 400,
+                    message: "L'utilisateur existe déjà'."
+                };
+            else
+                response = {
+                    code: 200,
+                    message: "Check réussi."
+                };
+        }
+        else
+        {
+            response = {
+                code: 400,
+                message: "L'email est invalide'."
+            };
+        }
+
+        return response;
     }
 
     /**
@@ -27,10 +50,30 @@ class ServiceRegister
      */
     async InsertUserInDb(email : string, password : string, type : string)
     {
-        if(this.IsEmailOk(email) && this.IsPasswordOk(password) && type != null && type != "")
+        let response: { code: number; message: string; } = { code: 400, message: "Service : Une erreur technique a été rencontrée." };
+
+        let isPasswordOk = this.IsPasswordOk(password);
+        let isTypeOk = type != null && type != "";
+
+        if(isPasswordOk && isTypeOk)
+        {
             await this.requeteModel.InsertUserInDb(email, await this.HashPassword(password), type);
+            response = { code: 200, message: "Inscription terminée." };
+        }
+        else if(isPasswordOk == false)
+            response = { code: 400, message: "Le mot de passe n'est pas au bon format." }
+        else if(isTypeOk == false)
+            response = { code: 400, message: "Le role n'est pas spécifié." }
+
+        return response;
     }
 
+    /**
+     * Hash the user's password
+     * @param password
+     * @constructor
+     * @private
+     */
     private async HashPassword(password: string)
     {
         return await bcrypt.hash(password, 10);
