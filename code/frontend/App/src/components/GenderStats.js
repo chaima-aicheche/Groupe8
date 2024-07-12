@@ -9,15 +9,31 @@ const StatsChart = () => {
         datasets: [
             {
                 data: [stats.male, stats.female],
-                backgroundColor: ['#36A2EB', '#FF6384'],
+                backgroundColor: ['rgba(127, 0, 255)', 'rgba(127, 0, 255, 0.5)'],
             },
         ],
     };
 
+    const options = {
+        layout: {
+            padding: 0
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 10,
+              padding: 20,
+            }
+          }
+        }
+      };
+
+
     return (
-        <div className="chart-container">
+        <div className="stats-gender">
             <h3>Pourcentages de Genres des Candidats</h3>
-            <Doughnut data={data} />
+            <Doughnut data={data} options={options}/>
         </div>
     );
 };

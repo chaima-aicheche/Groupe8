@@ -48,6 +48,17 @@
   color: white;
 }
 
+.card-Recruiter{
+  width: 250px;
+  height: 120px;
+  padding: 20px 15px;
+  background-color: rgba(128, 128, 128, 0.692);
+  border-radius: 10px;
+  color: white;
+  
+}
+
+
 .applications-container{
   margin-bottom: 50px;
 }
@@ -56,10 +67,20 @@
   padding: 0;
 }
 
+.stats-gender > canvas:nth-child(2){
+  width: 250px !important;
+  height: 250px !important;
+}
+
 .chart-articles{
   display: flex;
   justify-content: space-between;
   padding-right: 15%;
+}
+
+.dashboard-cards-recruiter{
+  flex-wrap: wrap;
+  gap: 50px;
 }
 
 .applications-list{
