@@ -23,7 +23,7 @@ app.use("/connexion", connexion);
 app.use("/reset", reset);
 
 
-
-app.listen(8080, () => {
-    console.log("[ ~ API started ~ ]\n\n");
+const port = 8080;
+app.listen(port, () => {
+    console.log(`[ ~ API started on port ${port} ~ ]\n\n`);
 });

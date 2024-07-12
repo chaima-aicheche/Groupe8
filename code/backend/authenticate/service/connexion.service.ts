@@ -31,6 +31,7 @@ class ServiceConnexion {
 
         // On récupère les données de l'utilisateur en base via son email.
         const userData = await this.model.getUserData(email);
+        console.log(userData);
 
         // Si l'email fournit n'existe pas en table on retourne false.
         if(userData.length != 1){

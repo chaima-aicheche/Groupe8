@@ -20,6 +20,25 @@ class ResetModel{
             throw error;
         }
     }
+
+
+
+
+    async updatePassword(email: string, password: string){
+        const enCommande: number = 1;
+
+        const query = 'UPDATE credentials SET "password" = $1 WHERE "email" = $2 RETURNING *';
+        const values = [password, email];
+
+        try {
+            const result = await pool.query(query, values);
+            console.log(`Modification du mot de passe de l'utilisateur \"${email}\" réussie.`);
+            return true;
+        } catch (error) {
+            console.error(`Echec de la modification du mot de passe de l'utilisateur \"${email}\".`, error);
+            throw error;
+        }
+    }
 }
 
 export default ResetModel;

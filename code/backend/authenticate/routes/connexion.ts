@@ -10,7 +10,7 @@ const service = new ServiceConnexion();
 
 
 
-router.post("/connect", async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
     try{
         const response = await service.connect(req.body);
         res.status(200).send(response);
