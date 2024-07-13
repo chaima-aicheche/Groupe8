@@ -18,7 +18,7 @@ const Topbar = () => {
         </div>
         <TopbarSubContenair>
             <div>
-              <Link to="/notif">
+              <Link to="/Notif">
                 <img src={logoNotif}></img>
               </Link>
             </div>

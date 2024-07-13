@@ -17,6 +17,56 @@ export const HeaderProfil = styled.div`
     width: 100%;
 `;
 
+export const ContainerHeaderProfil = styled.div`
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+`;
+
+export const InfoHeaderProfil = styled.div`
+    height: 90%;
+    width: 100%;
+    background-color: transparent;
+
+    display: flex;
+    flex-direction: row;
+
+    div:first-child {
+        background-color: transparent;
+        width: 25%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 150px;
+            height: 150px;
+        }
+    }
+
+    div:last-child {
+        background-color: transparent;
+        width: 35%;
+        padding-top: 70px;
+    }
+`;
+
+export const EditHeaderProfil = styled.div`
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    p {
+        margin: 0;
+        margin-right: 30px;
+    }
+`;
+
 export const NavProfil = styled.div`
     background-color: #F5F5F5;
 
@@ -40,6 +90,8 @@ export const BtnNavProfil = styled.div`
 
     height: 100%;
     width: 20%;
+
+    justify-content: center;
 
     button {
         border: none;

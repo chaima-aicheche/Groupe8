@@ -10,7 +10,10 @@ import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 
 import Redirect from './pages/Redirect';
-import Profil from './pages/Profil';
+import Profil from './pages/Profil/Profil';
+import ProfilCandidat from './pages/Profil/Profil';
+import ProfilEntreprise from './pages/Profil/Candidat';
+import ProfilCv from './pages/Profil/Cv';
 import Test from './pages/Test';
 
 import {
@@ -28,18 +31,22 @@ const AppContent = () => {
       {location.pathname !== '/Redirect' && <Sidebar />}
         <AppSubContainer>
           <Routes>
-          <Route path="/" element={<Test />} />
-          <Route path="/Redirect" element={<Redirect />} />
-          <Route path="/notif" element={<Test />} />
-          <Route path="/profile" element={<Profil />} />
-            <Route path="/job-offers" element={<Test />} />
-            <Route path="/interviews" element={<Test />}>
-              <Route path="planning" element={<Test />} />
+            <Route path="/" element={<Profil />} />
+            <Route path="/Redirect" element={<Redirect />} />
+            <Route path="/Notif" element={<Test />} />
+            <Route path="/Profil/*" element={<Profil />}>
+                <Route path="Candidat" element={<ProfilCandidat />} />
+                <Route path="CuriculumVitae" element={<ProfilEntreprise />} />
+                <Route path="Entreprise" element={<ProfilCv />} />
+            </Route>
+            <Route path="/JobOffers" element={<Test />} />
+            <Route path="/Interviews" element={<Test />}>
+              <Route path="Planning" element={<Test />} />
               <Route path="articles" element={<Test />} />
             </Route>
-            <Route path="/training" element={<Test />}>
-              <Route path="games" element={<Test />} />
-              <Route path="articles" element={<Test />} />
+            <Route path="/Training" element={<Test />}>
+              <Route path="Games" element={<Test />} />
+              <Route path="Articles" element={<Test />} />
             </Route>
           </Routes>
         </AppSubContainer>

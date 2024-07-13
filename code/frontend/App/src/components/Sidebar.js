@@ -27,15 +27,15 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/profile">
+            <Link to="/Profil">
               <div>
                 <img src={profil}></img>
-                <h1>Profile</h1>
+                <h1>Profil</h1>
               </div>
             </Link>
           </li>
           <li>
-            <Link to="/job-offers">
+            <Link to="/JobOffers">
             <div>
               <img src={offers}></img>
               <h1>Job Offers</h1>
@@ -43,7 +43,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/training">
+            <Link to="/Training">
               <div>
                 <img src={training}></img>
                 <h1>Training</h1>
@@ -51,7 +51,7 @@ const Sidebar = () => {
             </Link>
             <ul>
               <li>
-                <Link to="/training/articles">
+                <Link to="/Training/Articles">
                   <div>
                     <img src={go}></img>
                     <h1>Articles</h1>
@@ -59,7 +59,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/training/games">
+                <Link to="/Training/Games">
                   <div>
                     <img src={go}></img>
                     <h1>Games</h1>
@@ -69,7 +69,7 @@ const Sidebar = () => {
             </ul>
           </li>
           <li>
-            <Link to="/interviews">
+            <Link to="/Interviews">
               <div>
                 <img src={interviews}></img>
                 <h1>Interviews</h1>
@@ -77,7 +77,7 @@ const Sidebar = () => {
             </Link>
             <ul>
               <li>
-                <Link to="/interviews/planning">
+                <Link to="/Interviews/Planning">
                   <div>
                     <img src={go}></img>
                     <h1>Planning</h1>
@@ -85,7 +85,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/interviews/articles">
+                <Link to="/Interviews/Articles">
                   <div>
                     <img src={go}></img>
                     <h1>Articles</h1>
