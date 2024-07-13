@@ -2,12 +2,15 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Sidebar from './components/Sidebar';
+import Topbar from './components/Topbar';
+
 import Test from './pages/Test';
 
 const App = () => {
   return (
     <Router>
       <div className="app">
+        <Topbar />
         <Sidebar />
         <div className="content">
           <Routes>
