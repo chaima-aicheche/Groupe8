@@ -1,9 +1,8 @@
 import React from 'react';
-
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Sidebar from './components/Sidebar';
-import test from './pages/Test';
+import Test from './pages/Test';
 
 const App = () => {
   return (
@@ -25,7 +24,7 @@ const App = () => {
             </Route>
           </Routes>
         </div>
-      </div> 
+      </div>
     </Router>
   );
 };
