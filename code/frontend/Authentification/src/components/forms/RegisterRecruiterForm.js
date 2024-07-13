@@ -3,8 +3,6 @@ import './style.css';
 
 const RegisterRecruiterForm = () => {
   const [formData, setFormData] = useState({
-    nom: '',
-    prenom: '',
     raisonSociale: '',
     categorie: '',
     num: '',
@@ -61,32 +59,6 @@ const RegisterRecruiterForm = () => {
           <div className="form-col">
             <input
               type="text"
-              name="nom"
-              placeholder="Nom"
-              value={formData.nom}
-              onChange={handleChange}
-              className="form-input"
-              autoComplete="given-name" 
-              required
-            />
-          </div>
-          <div className="form-col">
-            <input
-              type="text"
-              name="prenom"
-              placeholder="Prénom"
-              value={formData.prenom}
-              onChange={handleChange}
-              className="form-input"
-              autoComplete="family-name" 
-              required
-            />
-          </div>
-        </div>
-        <div className="form-row">
-          <div className="form-col">
-            <input
-              type="text"
               name="raisonSociale"
               placeholder="Raison sociale"
               value={formData.raisonSociale}
@@ -111,7 +83,28 @@ const RegisterRecruiterForm = () => {
         </div>
         <div className="form-row">
           <div className="form-col">
-            <div className="small-text">Siège Social</div>
+            <input
+              type="text"
+              name="categorie"
+              placeholder="Categorie"
+              value={formData.categorie}
+              onChange={handleChange}
+              className="form-input"
+              autoComplete="categorie" 
+              required
+            />
+          </div>
+          <div className="form-col">
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-col">
+            <p style={{ margin: 0 }}>Siége Sociale</p>
+          </div>
+          <div className="form-col"></div>
+        </div>
+        <div className="form-row">
+          <div className="form-col">
             <input
               type="text"
               name="adresse"
@@ -126,12 +119,12 @@ const RegisterRecruiterForm = () => {
           <div className="form-col">
             <input
               type="text"
-              name="ville"
-              placeholder="Ville"
-              value={formData.ville}
+              name="pays"
+              placeholder="Pays"
+              value={formData.pays}
               onChange={handleChange}
               className="form-input"
-              autoComplete="address-level2" 
+              autoComplete="country" 
               required
             />
           </div>
@@ -152,12 +145,12 @@ const RegisterRecruiterForm = () => {
           <div className="form-col">
             <input
               type="text"
-              name="pays"
-              placeholder="Pays"
-              value={formData.pays}
+              name="ville"
+              placeholder="Ville"
+              value={formData.ville}
               onChange={handleChange}
               className="form-input"
-              autoComplete="country" 
+              autoComplete="address-level2" 
               required
             />
           </div>
