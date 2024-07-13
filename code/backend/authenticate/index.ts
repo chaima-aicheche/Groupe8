@@ -25,5 +25,7 @@ app.use("/reset", reset);
 
 const port = 8080;
 app.listen(port, () => {
-    console.log(`[ ~ API started on port ${port} ~ ]\n\n`);
+    console.log(`[ ~     API started     ~ ]`);
+    console.log(`[ ~     Authenticate    ~ ]`);
+    console.log(`[ ~    on port ${port}     ~ ]\n\n`);
 });
