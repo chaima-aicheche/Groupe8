@@ -9,7 +9,8 @@ import {
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 
-import Redirect from './pages/redirect';
+import Redirect from './pages/Redirect';
+import Profil from './pages/Profil';
 import Test from './pages/Test';
 
 import {
@@ -30,7 +31,7 @@ const AppContent = () => {
           <Route path="/" element={<Test />} />
           <Route path="/Redirect" element={<Redirect />} />
           <Route path="/notif" element={<Test />} />
-          <Route path="/profile" element={<Test />} />
+          <Route path="/profile" element={<Profil />} />
             <Route path="/job-offers" element={<Test />} />
             <Route path="/interviews" element={<Test />}>
               <Route path="planning" element={<Test />} />

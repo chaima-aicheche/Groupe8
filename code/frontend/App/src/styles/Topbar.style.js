@@ -11,7 +11,7 @@ export const TopbarContenair = styled.section`
     background-color: white;
     padding-left: 20px;
 
-    border-bottom: 1px solid rgb(0, 0, 0, 0.05);
+    border-bottom: 0.5px solid rgb(0, 0, 0, 0.05);
 
     img {
         width: 50%;

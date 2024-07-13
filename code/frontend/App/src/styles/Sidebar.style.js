@@ -6,7 +6,7 @@ export const SidebarContenair = styled.section`
     align-items: center;
     width: 20%;
     height: 100%;
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    border-right: 0.5px solid rgba(0, 0, 0, 0.05);
     background-color: #F5F5F5;
 
     img {
