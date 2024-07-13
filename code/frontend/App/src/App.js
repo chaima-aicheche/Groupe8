@@ -9,11 +9,11 @@ import {
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 
-import Redirect from './pages/Redirect';
-import Profil from './pages/Profil/Profil';
-import ProfilCandidat from './pages/Profil/Profil';
-import ProfilEntreprise from './pages/Profil/Candidat';
-import ProfilCv from './pages/Profil/Cv';
+import Redirect from './pages/redirect';
+import Profil from './pages/Profil/profil';
+import ProfilCandidat from './pages/Profil/profil';
+import ProfilEntreprise from './pages/Profil/candidat';
+import ProfilCv from './pages/Profil/cv';
 import Test from './pages/Test';
 
 import {
