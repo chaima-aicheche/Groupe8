@@ -19,8 +19,9 @@ const App = () => {
         <Sidebar />
         <AppSubContainer>
           <Routes>
-            <Route path="/" element={<Test />} />
-            <Route path="/profile" element={<Test />} />
+          <Route path="/" element={<Test />} />
+          <Route path="/notif" element={<Test />} />
+          <Route path="/profile" element={<Test />} />
             <Route path="/job-offers" element={<Test />} />
             <Route path="/interviews" element={<Test />}>
               <Route path="planning" element={<Test />} />

@@ -12,6 +12,10 @@ export const TopbarContenair = styled.section`
     padding-left: 20px;
 
     border-bottom: 1px solid rgb(0, 0, 0, 0.05);
+
+    img {
+        width: 50%;
+    }
 `;
 
 export const TopbarSubContenair = styled.div`

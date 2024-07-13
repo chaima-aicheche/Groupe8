@@ -6,7 +6,7 @@ import {
   TopbarSubContenair
 } from '../styles/Topbar.style'
 
-import logoTechTalent from '../assets/techTalent.png';
+import logo from '../assets/logo.png';
 import logoNotif from '../assets/notif.png';
 import logoLogout from '../assets/logout.png';
 
@@ -14,12 +14,11 @@ const Topbar = () => {
   return (
     <TopbarContenair>
         <div>
-        <img src={logoNotif}></img>
-        logo
+          <img src={logo}></img>
         </div>
         <TopbarSubContenair>
             <div>
-              <Link to="/">
+              <Link to="/notif">
                 <img src={logoNotif}></img>
               </Link>
             </div>
