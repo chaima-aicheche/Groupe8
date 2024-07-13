@@ -43,7 +43,7 @@ const Home = () => {
             <StyledLink to="/ResetPassword">Forgot Password ?</StyledLink>
           </div>
           <div>
-            <button> Log in </button>
+            <a href="https://techtalent.fr"> Log in </a>
           </div>
           <div>
             <p>Don't have an account?</p>
