@@ -89,8 +89,8 @@ class ServiceReset {
             port: 587,
             secure: false,
             auth: {
-                user: 'fabien.ricca@gmail.com', // Adresse email de l'expéditeur
-                pass: ''     // Mot de passe de l'expéditeur
+                user: 'techtalent861@gmail.com',    // Adresse email de l'expéditeur
+                pass: 'kpzy hszn yueh rglj'         // Mot de passe de l'expéditeur
             }
         });
 
