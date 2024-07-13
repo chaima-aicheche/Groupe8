@@ -6,13 +6,18 @@ import Topbar from './components/Topbar';
 
 import Test from './pages/Test';
 
+import {
+  AppContainer,
+  AppSubContainer
+} from './styles/App.style'
+
 const App = () => {
   return (
     <Router>
-      <div className="app">
-        <Topbar />
+      <Topbar />
+      <AppContainer>
         <Sidebar />
-        <div className="content">
+        <AppSubContainer>
           <Routes>
             <Route path="/" element={<Test />} />
             <Route path="/profile" element={<Test />} />
@@ -26,8 +31,8 @@ const App = () => {
               <Route path="articles" element={<Test />} />
             </Route>
           </Routes>
-        </div>
-      </div>
+        </AppSubContainer>
+      </AppContainer>
     </Router>
   );
 };

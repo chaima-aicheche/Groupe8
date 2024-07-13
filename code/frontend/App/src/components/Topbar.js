@@ -2,19 +2,33 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import {
-  TopbarContenair
+  TopbarContenair,
+  TopbarSubContenair
 } from '../styles/Topbar.style'
+
+import logoTechTalent from '../assets/techTalent.png';
+import logoNotif from '../assets/notif.png';
+import logoLogout from '../assets/logout.png';
 
 const Topbar = () => {
   return (
     <TopbarContenair>
         <div>
-            Logo
+        <img src={logoNotif}></img>
+        logo
         </div>
-        <div>
-            <h4>Notif</h4>
-            <Link to="/logout">Log Out</Link>
-        </div>
+        <TopbarSubContenair>
+            <div>
+              <Link to="/">
+                <img src={logoNotif}></img>
+              </Link>
+            </div>
+            <div>
+              <Link to="/logout">
+                <img src={logoLogout}></img>
+              </Link>
+            </div>
+        </TopbarSubContenair>
     </TopbarContenair>
   );
 };

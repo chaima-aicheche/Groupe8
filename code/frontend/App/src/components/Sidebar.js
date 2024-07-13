@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import {
+  SidebarContenair,
+  SidebarSubContenair
+} from '../styles/Sidebar.style'
+
 const Sidebar = () => {
   return (
-    <div className="sidebar">
+    <SidebarContenair>
       <nav>
         <ul>
           <li>
@@ -42,7 +47,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
-    </div>
+    </SidebarContenair>
   );
 };
 
