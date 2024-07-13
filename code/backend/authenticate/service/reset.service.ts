@@ -2,10 +2,13 @@
 import bcrypt from 'bcrypt';
 import * as generatePassword from 'generate-password';
 import * as nodeMailer from 'nodemailer';
+
+import UtilsService from '../service/utils.service';
 import ResetModel from "../bdd/reset.model";
 
 class ServiceReset {
     model = new ResetModel();
+    utils: UtilsService = new UtilsService();
 
     constructor() {
     }
@@ -19,7 +22,7 @@ class ServiceReset {
         let response = {};
 
         // On controle l'e-mail reçu.
-        if (!this.controleEmail(user.email)) {
+        if (!this.utils.controleFormatEmail(user.email)) {
             response = {
                 code: 400,
                 message: "L'email fournit est incorrect."
@@ -28,7 +31,7 @@ class ServiceReset {
         }
 
         // On nettoie l'e-mail reçu.
-        const email = this.sanitizeInput(user.email);
+        const email = this.utils.sanitizeInput(user.email);
 
         // On vérifie si l'email existe en base.
         const userData = await this.model.getUserData(email);
@@ -42,14 +45,13 @@ class ServiceReset {
 
         // On génère le nouveau mot de passe.
         const password = this.generatePassword();
-        console.log(password);
 
         // On envoie un mail avec le nouveau mot de passe.
-        this.sendEmail(email, password);
+        await this.utils.sendEmail(email, password);
 
         // On crypte le mot de passe et on le persiste en table.
-        const hashedPassword = await this.hashPassword(password);
-        this.model.updatePassword(email, hashedPassword);
+        const hashedPassword = await this.utils.hashPassword(password);
+        await this.model.updatePassword(email, hashedPassword);
 
         response ={
             code: 200,
@@ -59,19 +61,11 @@ class ServiceReset {
         return response;
     }
 
-    controleEmail(email: string){
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return false;
-        }
-        return true;
-    }
 
-    sanitizeInput(input: string){
-        return input.replace(/[^a-zA-Z0-9@.]/g, '');
-    }
-
-
+    /**
+     * Méthode pour générer un mot de passe aléatoire.
+     * @return password : Mot de passe généré.
+     */
     generatePassword(){
         const password = "@" + generatePassword.generate({
             length: 8,
@@ -81,38 +75,6 @@ class ServiceReset {
             strict: true
         });
         return password;
-    }
-
-    async sendEmail(email: string, password: string) {
-        let transporter = nodeMailer.createTransport({
-            host: 'smtp.gmail.com',
-            port: 587,
-            secure: false,
-            auth: {
-                user: 'techtalent861@gmail.com',    // Adresse email de l'expéditeur
-                pass: 'kpzy hszn yueh rglj'         // Mot de passe de l'expéditeur
-            }
-        });
-
-        let mailOptions = {
-            from: `${email}`,
-            to: 'lea.dubois@laplateforme.io',                       // Destinataires
-            subject: 'Reset password',                              // Sujet
-            text: `Voici votre nouveau mot de passe : ${password}`  // Contenu en texte brut
-        };
-
-        try {
-            let info = await transporter.sendMail(mailOptions);
-            console.log('Email envoyé: %s', info.messageId);
-        } catch (error) {
-            console.error('Erreur lors de l\'envoi de l\'email:', error);
-        }
-    }
-
-
-    async hashPassword(password: string){
-        const hashedPassword = await bcrypt.hash(password, 10);
-        return hashedPassword;
     }
 }
 
