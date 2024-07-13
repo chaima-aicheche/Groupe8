@@ -1,13 +1,32 @@
 import React from 'react';
 
-import Interviews from './components/Interviews';
-import Planning from './components/Planning';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+import Sidebar from './components/Sidebar';
+import test from './pages/Test';
 
 const App = () => {
   return (
-    <div>
-      <h1>App</h1>
-    </div>
+    <Router>
+      <div className="app">
+        <Sidebar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Test />} />
+            <Route path="/profile" element={<Test />} />
+            <Route path="/job-offers" element={<Test />} />
+            <Route path="/interviews" element={<Test />}>
+              <Route path="planning" element={<Test />} />
+              <Route path="articles" element={<Test />} />
+            </Route>
+            <Route path="/training" element={<Test />}>
+              <Route path="games" element={<Test />} />
+              <Route path="articles" element={<Test />} />
+            </Route>
+          </Routes>
+        </div>
+      </div> 
+    </Router>
   );
 };
 
