@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Interviews from './components/Interviews';
+import Planning from './components/Planning';
+
 const App = () => {
   return (
     <div>
