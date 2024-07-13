@@ -1,9 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation
+} from 'react-router-dom';
 
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 
+import Redirect from './pages/redirect';
 import Test from './pages/Test';
 
 import {
@@ -11,15 +17,18 @@ import {
   AppSubContainer
 } from './styles/App.style'
 
-const App = () => {
+const AppContent = () => {
+  const location = useLocation();
+
   return (
-    <Router>
-      <Topbar />
+    <>
+      {location.pathname !== '/Redirect' && <Topbar />}
       <AppContainer>
-        <Sidebar />
+      {location.pathname !== '/Redirect' && <Sidebar />}
         <AppSubContainer>
           <Routes>
           <Route path="/" element={<Test />} />
+          <Route path="/Redirect" element={<Redirect />} />
           <Route path="/notif" element={<Test />} />
           <Route path="/profile" element={<Test />} />
             <Route path="/job-offers" element={<Test />} />
@@ -34,8 +43,14 @@ const App = () => {
           </Routes>
         </AppSubContainer>
       </AppContainer>
-    </Router>
+    </>
   );
 };
+
+const App = () => (
+  <Router>
+    <AppContent />
+  </Router>
+);
 
 export default App;

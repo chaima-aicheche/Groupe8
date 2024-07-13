@@ -23,7 +23,7 @@ const Topbar = () => {
               </Link>
             </div>
             <div>
-              <Link to="/logout">
+              <Link to="/Redirect">
                 <img src={logoLogout}></img>
               </Link>
             </div>
