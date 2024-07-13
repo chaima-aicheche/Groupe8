@@ -2,12 +2,12 @@ services:
   krakend:
       build:
         context: infra/krakend
-        dockerfile: Dockerfile
+      container_name: krakend
       ports:
         - "8080:8080"
         - "8090:8090"
       networks:
-        - symfony-short-network
+        - tech-talent
   
   tech_talent_formation:
     build:
@@ -16,7 +16,7 @@ services:
     ports:
       - "8084:80"
     networks:
-      - symfony-short-network
+      - tech-talent
 
   tech_talent_auth:
     build:
@@ -25,7 +25,7 @@ services:
     ports:
       - "8083:80"
     networks:
-      - symfony-short-network
+      - tech-talent
 
   tech_talent_app:
     build:
@@ -34,7 +34,7 @@ services:
     ports:
       - "8082:80"
     networks:
-      - symfony-short-network
+      - tech-talent
 
   tech_talent:
     build:
@@ -44,7 +44,7 @@ services:
       - "443:443"
       - "80:80"
     networks:
-      symfony-short-network:
+      tech-talent:
         ipv4_address: 172.20.0.100
 
 
@@ -55,11 +55,20 @@ services:
     ports:
       - "7070:7070"
     networks:
-      - symfony-short-network
+      - tech-talent
+
+  user:
+    build:
+      context: code/backend/User
+    container_name: user
+    ports:
+      - "7071:7071"
+    networks:
+      - tech-talent
  
 networks:
-  symfony-short-network:
-    name: symfony-short-network
+  tech-talent:
+    name: tech-talent
     ipam:
       driver: default
       config:

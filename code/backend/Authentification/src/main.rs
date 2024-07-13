@@ -1,17 +1,19 @@
-use actix_web::{App, HttpServer, Responder, HttpResponse};
+use actix_web::{App, HttpServer};
 
-#[actix_web::post("/home")]
-async fn home() -> impl Responder {
-    HttpResponse::Ok().body("Hello World!")
-}
+mod api;
+use api::login;
+use api::register;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
-            .service(home)
+        .service(login::login)
+        .service(register::register)
     })
     .bind("0.0.0.0:7070")?
     .run()
     .await
 }
+
+

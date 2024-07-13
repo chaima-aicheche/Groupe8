@@ -1,1 +1,5 @@
 node_modules
+.DS_Store
+code/frontend/Formation/package-lock.json
+code/frontend/App/package-lock.json
+code/backend/tmp

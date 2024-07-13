@@ -12,7 +12,7 @@ RUN rustup update
 
 WORKDIR /usr/src/app
 
-COPY Cargo.toml Cargo.lock ./
+COPY Cargo.toml ./
 COPY src ./src
 
 RUN cargo build --release

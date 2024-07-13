@@ -15,6 +15,14 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource'
+      },
+      {
+        test: /\.css$/, // Nouvelle règle pour les fichiers CSS
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
