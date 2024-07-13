@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import {
+  TopbarContenair
+} from '../styles/Topbar.style'
+
 const Topbar = () => {
   return (
-    <div>
+    <TopbarContenair>
         <div>
             Logo
         </div>
@@ -11,7 +15,7 @@ const Topbar = () => {
             <h4>Notif</h4>
             <Link to="/logout">Log Out</Link>
         </div>
-    </div>
+    </TopbarContenair>
   );
 };
 
