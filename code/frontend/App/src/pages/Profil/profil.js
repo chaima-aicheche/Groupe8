@@ -10,10 +10,13 @@ import {
 
     ContainerHeaderProfil,
     InfoHeaderProfil,
-    EditHeaderProfil
 } from '../../styles/Profil/Profil.style';
 
 import img from '../../assets/img.png';
+
+import ProfilCandidat from './candidat';
+import ProfilEntreprise from './entreprise';
+import ProfilCv from './cv';
 
 const Profil = () => {
 
@@ -30,9 +33,6 @@ const Profil = () => {
                         <p>adresse</p>
                     </div>
                 </InfoHeaderProfil>
-                <EditHeaderProfil>
-                    <p>Edit Profil</p>
-                </EditHeaderProfil>
             </ContainerHeaderProfil>
         </HeaderProfil>
         <NavProfil>
@@ -54,9 +54,9 @@ const Profil = () => {
         </NavProfil>
         <InfoProfil>
             <Routes>
-                <Route path="Candidat" />
-                <Route path="CuriculumVitae" />
-                <Route path="Entreprise" />
+                <Route path="Candidat" element={<ProfilCandidat />} />
+                <Route path="CuriculumVitae" element={<ProfilCv />} />
+                <Route path="Entreprise" element={<ProfilEntreprise />} />
             </Routes>
         </InfoProfil>
     </ContainerProfil>

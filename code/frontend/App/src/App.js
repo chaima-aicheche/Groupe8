@@ -31,7 +31,7 @@ const AppContent = () => {
       {location.pathname !== '/Redirect' && <Sidebar />}
         <AppSubContainer>
           <Routes>
-            <Route path="/" element={<Profil />} />
+            <Route path="/" element={<Test />} />
             <Route path="/Redirect" element={<Redirect />} />
             <Route path="/Notif" element={<Test />} />
             <Route path="/Profil/*" element={<Profil />}>

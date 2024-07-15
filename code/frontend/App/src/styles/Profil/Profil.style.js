@@ -54,19 +54,6 @@ export const InfoHeaderProfil = styled.div`
     }
 `;
 
-export const EditHeaderProfil = styled.div`
-    height: 10%;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    p {
-        margin: 0;
-        margin-right: 30px;
-    }
-`;
-
 export const NavProfil = styled.div`
     background-color: #F5F5F5;
 

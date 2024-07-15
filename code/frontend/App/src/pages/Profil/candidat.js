@@ -6,7 +6,20 @@ import {
 const ProfilCandidat = () => {
 
     return (
-        <p>Profil Candidat</p>
+        <div>
+            <div>
+                <p>Edit Profil</p>
+            </div>
+            <div>
+                <input>test</input>
+                <input>test</input>
+                <input>test</input>
+                <input>test</input>
+            </div>
+            <div>
+                <p>test</p>
+            </div>
+        </div>
     );
 }
 
