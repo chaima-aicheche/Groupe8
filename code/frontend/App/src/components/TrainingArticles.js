@@ -144,8 +144,8 @@ const TrainingArticles = () => {
                                     onChange={handleFilterChange}
                                 >
                                     <option value="">Choisir un formateur</option>
-                                    {formateurs.map((formateur) => (
-                                        <option key={formateur} value={formateur}>
+                                    {formateurs.map((formateur, index) => (
+                                        <option key={index} value={formateur}>
                                             {formateur}
                                         </option>
                                     ))}
