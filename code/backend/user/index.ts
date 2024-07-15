@@ -11,13 +11,11 @@ app.use(cors({origin: '*'}));
 app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
-    res.json({message: "Bonjour"});
+    res.json({message: "Bonjour from user MS"});
 });
 
-
-
-app.use("/candidat", candidat);
-
+app.use("/createCandidat", candidat);
+app.use("/createRecruteur", candidat);
 
 const port = 8090;
 app.listen(port, () => {
