@@ -56,6 +56,19 @@ services:
       - "7070:7070"
     networks:
       - tech-talent
+    environment:
+      - MONGO_URI=mongodb://db_auth:27017/db_auth
+      - Key=TechTalentAuth
+    
+  db_auth:
+    image: mongo:latest
+    container_name: db_auth
+    ports:
+      - "27017:27017"
+    networks:
+      - tech-talent
+    volumes:
+      - mongo_data_auth:/data/db
 
   user:
     build:
@@ -74,3 +87,5 @@ networks:
       config:
         - subnet: 172.20.0.0/16
 
+volumes:
+  mongo_data_auth: {}
