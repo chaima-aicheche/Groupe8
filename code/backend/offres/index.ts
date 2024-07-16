@@ -1,9 +1,12 @@
 // @ts-ignore
 import express from 'express';
-import {Request, Response} from "express";
 // @ts-ignore
 import cors from 'cors';
+
+import {Request, Response} from "express";
 import creation from './routes/creation';
+import statistiques from "./routes/statistiques";
+
 
 const app = express();
 
@@ -17,6 +20,7 @@ app.get("/", (req: Request, res: Response) => {
 
 
 app.use("/creation", creation);
+app.use("/getStats", statistiques);
 
 
 const port = 8070;
