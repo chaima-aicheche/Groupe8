@@ -6,6 +6,7 @@ import cors from 'cors';
 import {Request, Response} from "express";
 import creation from './routes/creation';
 import statistiques from "./routes/statistiques";
+import candidatures from "./routes/candidatures";
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/creation", creation);
 app.use("/getStats", statistiques);
+app.use("/getCandidatures", candidatures)
 
 
 const port = 8070;
