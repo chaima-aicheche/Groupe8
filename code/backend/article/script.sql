@@ -16,11 +16,25 @@ CREATE TABLE "article" (
 );
 
 
-CREATE TABLE "historique" (
+CREATE TABLE "historique_lecture" (
     "id" SERIAL PRIMARY KEY,
     "id_article" int NOT NULL,
     "id_candidat" int NOT NULL,
     "date_lecture" TIMESTAMP NOT NULL
 );
 
-ALTER TABLE "historique" ADD CONSTRAINT "fk_id_article" FOREIGN KEY ("id_article") REFERENCES "article" ("id");
+ALTER TABLE "historique_lecture" ADD CONSTRAINT "fk_id_article" FOREIGN KEY ("id_article") REFERENCES "article" ("id");
+
+
+
+-- DONNEES FACTICE POUR LE DEVELOPPEMENT
+-- INSERT INTO "article" ("titre", "categorie", "description", "contenu", "image", "date_publication") VALUES
+-- ('Les nouveautés en Java 17', 'Programmation', 'Un aperçu des nouvelles fonctionnalités de Java 17', 'Java 17 apporte de nombreuses améliorations...', 'image.svg', '2023-07-01 10:00:00'),
+-- ('Les meilleures pratiques en DevOps', 'Informatique', 'Comment améliorer votre flux de travail DevOps', 'Pour optimiser les processus DevOps, il est crucial de...', 'image.svg', '2023-07-02 11:00:00'),
+-- ('Les tendances UX/UI en 2024', 'Design', 'Ce qu''il faut savoir sur les tendances UX/UI de cette année', 'En 2024, les tendances UX/UI se concentreront sur...', 'image.svg', '2023-07-03 12:00:00');
+
+
+-- INSERT INTO "historique_lecture" ("id_article", "id_candidat", "date_lecture") VALUES
+-- ('1', '1', '2024-07-01 10:00:00'),
+-- ('2', '2', '2024-07-07 10:00:00'),
+-- ('3', '3', '2024-07-11 10:00:00');
