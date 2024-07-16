@@ -20,7 +20,7 @@ class CandidatModel {
     async InsertCandidatInDb(email: string, num_telephone: string, nom: string, prenom: string, adresse: string
         , code_postal: string, ville: string, pays: string, genre: string, cv: string)
     {
-        const query = 'INSERT INTO candidat ("email", "num_telephone", "nom", "prenom", "adresse", "code_postal", "ville", "pays", "genre", "cv") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
+        const query = 'INSERT INTO candidat ("email", "num_telephone", "nom", "prenom", "adresse", "code_postal", "ville", "pays", "genre", "cv") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *';
         const values = [email, num_telephone, nom, prenom, adresse, code_postal, ville, pays, genre, cv];
 
         let response : {code : number, message : string};
@@ -46,7 +46,7 @@ class CandidatModel {
     async InsertRecruteurInDb(email: string, num_telephone: string, raison_sociale: string, adresse: string
         , code_postal: string, ville: string, pays: string, categorie: string)
     {
-        const query = 'INSERT INTO candidat ("email", "num_telephone", "raison_sociale", "adresse", "code_postal", "ville", "pays", "categorie") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+        const query = 'INSERT INTO recruteur ("email", "num_telephone", "raison_sociale", "adresse", "code_postal", "ville", "pays", "categorie") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *';
         const values = [email, num_telephone, raison_sociale, adresse, code_postal, ville, pays, categorie];
 
         let response : {code : number, message : string};

@@ -14,8 +14,7 @@ app.get("/", (req: Request, res: Response) => {
     res.json({message: "Bonjour from user MS"});
 });
 
-app.use("/createCandidat", candidat);
-app.use("/createRecruteur", candidat);
+app.use("/candidat", candidat);
 
 const port = 8090;
 app.listen(port, () => {
