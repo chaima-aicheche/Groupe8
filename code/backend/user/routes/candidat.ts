@@ -12,7 +12,7 @@ router.get("/", (req: Request, res: Response) => {
     res.json({message: "Bonjour from candidat"});
 });
 
-router.post("/createCandidat", async (req: Request, res: Response) => {
+router.post("/create", async (req: Request, res: Response) => {
     try{
         const response = await service.InsertCandidatInDb(req.body.email, req.body.num_telephone, req.body.nom, req.body.prenom
             , req.body.adresse, req.body.code_postal, req.body.ville, req.body.pays, req.body.genre, req.body.cv);
@@ -23,10 +23,11 @@ router.post("/createCandidat", async (req: Request, res: Response) => {
     }
 });
 
-router.post("/createRecruteur", async (req: Request, res: Response) => {
+router.post("/update", async (req: Request, res: Response) => {
     try{
-        const response = await service.InsertRecruteurInDb(req.body.email, req.body.num_telephone, req.body.raison_sociale
-            , req.body.adresse, req.body.code_postal, req.body.ville, req.body.pays, req.body.categorie);
+        const response = await service.UpdateCandidatInDb(req.body.oldEmail, req.body.newEmail, req.body.num_telephone
+            , req.body.nom, req.body.prenom, req.body.adresse, req.body.code_postal, req.body.ville, req.body.pays
+            , req.body.genre, req.body.cv, req.body.idUser);
         res.status(200).send(response);
     }
     catch (e){

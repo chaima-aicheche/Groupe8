@@ -1,6 +1,6 @@
 import pool from '../bdd/pool.config';
 
-class RegisterModel
+class UpdateModel
 {
     /**
      * Check if the user is already in the DB
@@ -25,22 +25,26 @@ class RegisterModel
     }
 
     /**
-     * Insert the user's data in the credential DB
-     * @param email
-     * @param password
-     * @param role
+     * Update l'email en DB
+     * @param oldEmail
+     * @param newEmail
      * @constructor
      */
-    async InsertUserInDb(email : string, password : string, role : string)
+    async UpdateUserInDb(oldEmail : string, newEmail : string)
     {
-        const query = 'INSERT INTO credentials ("email", "password", "role") values ($1, $2, $3)';
-        const values: string[] = [email, password, role];
+        const query = 'UPDATE credentials SET "email" = $1 WHERE "email" = $2';
+        const values: string[] = [newEmail, oldEmail];
+
+        let response: { code: number; message: string; };
 
         try
         {
             const result = await pool.query(query, values);
-            console.log(result);
-            // return result.rows;
+            if(result.rowCount != null && result.rowCount > 0)
+                response = {code : 200, message : "Mise à jour réussie."}
+            else
+                response = {code : 400, message : "Une erreur est survenue, mise à jour impossible"}
+            return response;
         }
         catch(error)
         {
@@ -50,4 +54,4 @@ class RegisterModel
     }
 }
 
-export default RegisterModel;
+export default UpdateModel;
