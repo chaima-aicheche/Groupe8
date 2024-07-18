@@ -38,12 +38,12 @@ struct ErrorDetail {
 
 #[post("/refresh")]
 pub async fn refresh( data: web::Json<RefreshTokenRequest>, db: web::Data<Collection<mongodb::bson::Document>>, ) -> impl Responder {
-    //let secret = env::var("Key").unwrap_or_else(|_| "default_secret".to_string());
-    let secret = "your_secret_key"; // a recuperer dans l'environement
+    //let secret_refresh = env::var("KeyAcces").unwrap_or_else(|_| "default_secret".to_string()); // prod
+    let secret_refresh = "refresh"; //dev
 
     let decoded = decode::<ClaimsRefresh>(
         &data.refresh_token,
-        &DecodingKey::from_secret(secret.as_ref()),
+        &DecodingKey::from_secret(secret_refresh.as_ref()),
         &Validation::default(),
     );
 
@@ -62,10 +62,13 @@ pub async fn refresh( data: web::Json<RefreshTokenRequest>, db: web::Data<Collec
                         exp: (SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs() + 900) as usize,
                     };
 
+                    //let secret_access = env::var("KeyRefresh").unwrap_or_else(|_| "default_secret".to_string()); //prod
+                    let secret_access = "access"; // dev
+                
                     let access_token = encode(
                         &Header::default(),
                         &access_claims,
-                        &EncodingKey::from_secret(secret.as_ref())
+                        &EncodingKey::from_secret(secret_access.as_ref())
                     ).unwrap();
 
                     return HttpResponse::Ok().json(RefreshResponse {
@@ -85,5 +88,3 @@ pub async fn refresh( data: web::Json<RefreshTokenRequest>, db: web::Data<Collec
         }),
     }
 }
-
- 

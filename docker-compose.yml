@@ -8,7 +8,7 @@ services:
         - "8090:8090"
       networks:
         - tech-talent
-  
+
   tech_talent_formation:
     build:
       context: code/frontend/Formation
@@ -47,7 +47,6 @@ services:
       tech-talent:
         ipv4_address: 172.20.0.100
 
-
   authentification:
     build:
       context: code/backend/Authentification
@@ -57,14 +56,15 @@ services:
     networks:
       - tech-talent
     environment:
-      - MONGO_URI=mongodb://db_auth:27017/db_auth
-      - Key=TechTalentAuth
-    
+      - MONGO_URI=mongodb://db_auth:27016/db_auth
+      - KeyAccess=TechTalentAuthAcces
+      - KeyRefresh=TechTalentAuthRefresh
+
   db_auth:
     image: mongo:latest
     container_name: db_auth
     ports:
-      - "27017:27017"
+      - "27016:27017"
     networks:
       - tech-talent
     volumes:
@@ -78,7 +78,19 @@ services:
       - "7071:7071"
     networks:
       - tech-talent
- 
+    environment:
+      - MONGO_URI=mongodb://db_user:27015/db_user
+
+  db_user:
+    image: mongo:latest
+    container_name: db_user
+    ports:
+      - "27015:27017"
+    networks:
+      - tech-talent
+    volumes:
+      - mongo_data_user:/data/db
+
 networks:
   tech-talent:
     name: tech-talent
@@ -89,3 +101,5 @@ networks:
 
 volumes:
   mongo_data_auth: {}
+  mongo_data_user: {}
+

@@ -7,6 +7,7 @@ use jsonwebtoken::{encode, Header, EncodingKey};
 use std::time::{SystemTime, UNIX_EPOCH};
 use std::env;
 
+use crate::api::app_state::AppState;
 
 #[derive(Serialize, Deserialize)]
 pub struct LoginRequest {
@@ -40,11 +41,13 @@ struct ClaimsRefresh {
 }
 
 #[post("/login")]
-pub async fn login( data: web::Json<LoginRequest>, db: web::Data<Collection<mongodb::bson::Document>>, ) -> impl Responder {
+pub async fn login( data: web::Json<LoginRequest>, db: web::Data<AppState>, ) -> impl Responder {
     let email = &data.email;
     let password = &data.password;
 
-    match db.find_one(doc! { "email": email }, None).await {
+    let db_user = &db.user_local;
+
+    match db_user.find_one(doc! { "email": email }, None).await {
         Ok(Some(user)) => {
             let stored_password: String = user.get_str("password").unwrap().to_string();
 
@@ -68,13 +71,21 @@ pub async fn login( data: web::Json<LoginRequest>, db: web::Data<Collection<mong
                         .unwrap().as_secs() + 604800) as usize, // 7 days
                 };
 
-                //let secret = env::var("Key").unwrap_or_else(|_| "default_secret".to_string());
-                let secret = "your_secret_key"; // a recuperer dans l'environement
-                let access_token = encode(&Header::default(), &access_claims, &EncodingKey::from_secret(secret.as_ref()))
-                    .unwrap();
+                //let secret_access = env::var("KeyAcces").unwrap_or_else(|_| "default_secret".to_string()); // prod
+                let secret_access = "access"; // dev
+                let access_token = encode(
+                    &Header::default(),
+                    &access_claims,
+                    &EncodingKey::from_secret(secret_access.as_ref())
+                ).unwrap();
 
-                let refresh_token = encode(&Header::default(), &refresh_claims, &EncodingKey::from_secret(secret.as_ref()))
-                    .unwrap();
+                let secret_refresh = env::var("KeyRefresh").unwrap_or_else(|_| "default_secret".to_string()); // prod
+                //let secret_refresh = "refresh"; // dev
+                let refresh_token = encode(
+                    &Header::default(),
+                    &refresh_claims,
+                    &EncodingKey::from_secret(secret_refresh.as_ref())
+                ).unwrap();
 
                 return HttpResponse::Ok().json(LoginResponse {
                     access_token,
