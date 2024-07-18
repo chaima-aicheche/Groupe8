@@ -56,7 +56,8 @@ services:
     networks:
       - tech-talent
     environment:
-      - MONGO_URI=mongodb://db_auth:27016/db_auth
+      - MONGO_URI=mongodb://db_auth:27016
+      - MONGO_db_URI=db_auth
       - KeyAccess=TechTalentAuthAcces
       - KeyRefresh=TechTalentAuthRefresh
 
@@ -79,7 +80,8 @@ services:
     networks:
       - tech-talent
     environment:
-      - MONGO_URI=mongodb://db_user:27015/db_user
+      - MONGO_URI=mongodb://db_user:27015
+      - MONGO_db_URI=db_user
 
   db_user:
     image: mongo:latest
@@ -90,7 +92,7 @@ services:
       - tech-talent
     volumes:
       - mongo_data_user:/data/db
-
+ 
 networks:
   tech-talent:
     name: tech-talent

@@ -1,11 +1,11 @@
-use actix_web::{post, web, HttpResponse, Responder};
+
+use actix_web::{post, web, HttpResponse };
 use actix_web::client::Client;
 use serde::{Deserialize, Serialize};
 use mongodb::{Collection};
 use mongodb::bson::{Document, doc};
 use bcrypt::{hash, DEFAULT_COST};
-use serde_json::Value;
-use serde_json::json;
+use serde_json::{Value, json};
 
 use crate::api::app_state::AppState;
 
@@ -327,8 +327,8 @@ struct UserIdResponse {
 
 async fn create_users(document: serde_json::Value) -> Result<String, actix_web::Error> {
     let client = Client::default();
-    //let mut response = client.post("http://user:7071/create") //prod
-    let mut response = client.post("http://localhost:7071/create") //dev
+    let mut response = client.post("http://user:7071/create") //prod
+    //let mut response = client.post("http://localhost:7071/create") //dev
         .send_json(&document)
         .await
         .map_err(|_| HttpResponse::InternalServerError().json(ErrorDetail { message: "Échec de la création de l'utilisateur".to_string() }))?;

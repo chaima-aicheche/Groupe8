@@ -4,7 +4,7 @@ use mongodb::bson::{doc};
 use jsonwebtoken::{decode, encode, Header, DecodingKey, EncodingKey, Validation}; // Add EncodingKey here
 use serde::{Deserialize, Serialize};
 use std::time::{SystemTime, UNIX_EPOCH};
-use std::env;
+use std::env; // prod
 
 #[derive(Deserialize)]
 pub struct RefreshTokenRequest {
@@ -38,8 +38,8 @@ struct ErrorDetail {
 
 #[post("/refresh")]
 pub async fn refresh( data: web::Json<RefreshTokenRequest>, db: web::Data<Collection<mongodb::bson::Document>>, ) -> impl Responder {
-    //let secret_refresh = env::var("KeyAcces").unwrap_or_else(|_| "default_secret".to_string()); // prod
-    let secret_refresh = "refresh"; //dev
+    let secret_refresh = env::var("KeyAcces").unwrap_or_else(|_| "default_secret".to_string()); // prod
+    //let secret_refresh = "refresh"; //dev
 
     let decoded = decode::<ClaimsRefresh>(
         &data.refresh_token,
@@ -62,8 +62,8 @@ pub async fn refresh( data: web::Json<RefreshTokenRequest>, db: web::Data<Collec
                         exp: (SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs() + 900) as usize,
                     };
 
-                    //let secret_access = env::var("KeyRefresh").unwrap_or_else(|_| "default_secret".to_string()); //prod
-                    let secret_access = "access"; // dev
+                    let secret_access = env::var("KeyRefresh").unwrap_or_else(|_| "default_secret".to_string()); //prod
+                    //let secret_access = "access"; //dev
                 
                     let access_token = encode(
                         &Header::default(),

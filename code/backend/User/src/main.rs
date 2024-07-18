@@ -1,14 +1,14 @@
 use actix_web::{App, HttpServer, web::Data};
 use mongodb::{Client as MongoClient, Collection};
-use mongodb::bson::{Document, doc};
+use mongodb::bson::{Document};
 
 mod api;
 use api::{profil, create, app_state};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    //let client = MongoClient::with_uri_str("mongodb://db_user:27015/") //prod
-    let client = MongoClient::with_uri_str("mongodb://localhost:27017") //dev
+    let client = MongoClient::with_uri_str("mongodb://db_user:27017/") //prod
+    //let client = MongoClient::with_uri_str("mongodb://localhost:27017") //dev
     .await
     .map_err(|_| std::io::Error::new(std::io::ErrorKind::Other, "Failed to connect to MongoDB"))?;
     

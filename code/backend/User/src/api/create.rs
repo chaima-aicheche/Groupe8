@@ -1,4 +1,4 @@
-use actix_web::{post, web, HttpResponse, Responder};
+use actix_web::{post, web, HttpResponse};
 use serde::{Deserialize, Serialize};
 use mongodb::Collection;
 use mongodb::bson::{Document, doc};

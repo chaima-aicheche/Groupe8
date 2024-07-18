@@ -1,6 +1,5 @@
 use actix_web::{post, web, HttpResponse, Responder};
 use serde::{Deserialize, Serialize};
-use mongodb::Collection;
 use mongodb::bson::{doc};
 use bcrypt::verify;
 use jsonwebtoken::{encode, Header, EncodingKey};
@@ -71,16 +70,16 @@ pub async fn login( data: web::Json<LoginRequest>, db: web::Data<AppState>, ) ->
                         .unwrap().as_secs() + 604800) as usize, // 7 days
                 };
 
-                //let secret_access = env::var("KeyAcces").unwrap_or_else(|_| "default_secret".to_string()); // prod
-                let secret_access = "access"; // dev
+                let secret_access = env::var("KeyAcces").unwrap_or_else(|_| "default_secret".to_string()); //prod
+                //let secret_access = "access"; //dev
                 let access_token = encode(
                     &Header::default(),
                     &access_claims,
                     &EncodingKey::from_secret(secret_access.as_ref())
                 ).unwrap();
 
-                let secret_refresh = env::var("KeyRefresh").unwrap_or_else(|_| "default_secret".to_string()); // prod
-                //let secret_refresh = "refresh"; // dev
+                let secret_refresh = env::var("KeyRefresh").unwrap_or_else(|_| "default_secret".to_string()); //prod
+                //let secret_refresh = "refresh"; //dev
                 let refresh_token = encode(
                     &Header::default(),
                     &refresh_claims,
