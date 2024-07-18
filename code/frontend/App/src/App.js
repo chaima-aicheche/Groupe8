@@ -1,40 +1,64 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Home from './components/Home';
-import Profile from './components/Profile';
-import JobOffers from './components/JobOffers';
-import Interviews from './components/Interviews';
-import Planning from './components/Planning';
-import Articles from './components/Articles';
-import Training from './components/Training';
-import Games from './components/Games';
-import TrainingArticles from './components/TrainingArticles';
-import './styles/App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation
+} from 'react-router-dom';
 
-const App = () => {
+import Sidebar from './components/Sidebar';
+import Topbar from './components/Topbar';
+
+import Redirect from './pages/redirect';
+import Profil from './pages/Profil/profil';
+import ProfilCandidat from './pages/Profil/profil';
+import ProfilEntreprise from './pages/Profil/candidat';
+import ProfilCv from './pages/Profil/cv';
+import Test from './pages/Test';
+
+import {
+  AppContainer,
+  AppSubContainer
+} from './styles/App.style'
+
+const AppContent = () => {
+  const location = useLocation();
+
   return (
-    <Router>
-      <div className="app">
-        <Sidebar />
-        <div className="content">
+    <>
+      {location.pathname !== '/Redirect' && <Topbar />}
+      <AppContainer>
+      {location.pathname !== '/Redirect' && <Sidebar />}
+        <AppSubContainer>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/job-offers" element={<JobOffers />} />
-            <Route path="/interviews" element={<Interviews />}>
-              <Route path="planning" element={<Planning />} />
-              <Route path="articles" element={<Articles />} />
+            <Route path="/" element={<Test />} />
+            <Route path="/Redirect" element={<Redirect />} />
+            <Route path="/Notif" element={<Test />} />
+            <Route path="/Profil/*" element={<Profil />}>
+                <Route path="Candidat" element={<ProfilCandidat />} />
+                <Route path="CuriculumVitae" element={<ProfilEntreprise />} />
+                <Route path="Entreprise" element={<ProfilCv />} />
             </Route>
-            <Route path="/training" element={<Training />}>
-              <Route path="games" element={<Games />} />
-              <Route path="articles" element={<TrainingArticles />} />
+            <Route path="/JobOffers" element={<Test />} />
+            <Route path="/Interviews" element={<Test />}>
+              <Route path="Planning" element={<Test />} />
+              <Route path="articles" element={<Test />} />
+            </Route>
+            <Route path="/Training" element={<Test />}>
+              <Route path="Games" element={<Test />} />
+              <Route path="Articles" element={<Test />} />
             </Route>
           </Routes>
-        </div>
-      </div> 
-    </Router>
+        </AppSubContainer>
+      </AppContainer>
+    </>
   );
 };
+
+const App = () => (
+  <Router>
+    <AppContent />
+  </Router>
+);
 
 export default App;

@@ -1,50 +1,102 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Sidebar.css';
-import '../components/Games';
+
+import {
+  SidebarContenair
+} from '../styles/Sidebar.style'
+
+import home from '../assets/home.png';
+import training from '../assets/training.png';
+import profil from '../assets/profil.png';
+import offers from '../assets/offers.png';
+import interviews from '../assets/interviews.png';
+import logoLogout from '../assets/logout.png';
+import go from '../assets/go.png';
 
 const Sidebar = () => {
   return (
-    <div className="sidebar">
+    <SidebarContenair>
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">
+              <div>
+                <img src={home}></img>
+                <h1>Home</h1>
+              </div>
+            </Link>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to="/Profil">
+              <div>
+                <img src={profil}></img>
+                <h1>Profil</h1>
+              </div>
+            </Link>
           </li>
           <li>
-            <Link to="/training">Training</Link>
+            <Link to="/JobOffers">
+            <div>
+              <img src={offers}></img>
+              <h1>Job Offers</h1>
+            </div>
+            </Link>
+          </li>
+          <li>
+            <Link to="/Training">
+              <div>
+                <img src={training}></img>
+                <h1>Training</h1>
+              </div>
+            </Link>
             <ul>
               <li>
-                <Link to="/training/articles">Articles</Link>
+                <Link to="/Training/Articles">
+                  <div>
+                    <img src={go}></img>
+                    <h1>Articles</h1>
+                  </div>
+                </Link>
               </li>
               <li>
-                <Link to="/training/games">Games</Link>
+                <Link to="/Training/Games">
+                  <div>
+                    <img src={go}></img>
+                    <h1>Games</h1>
+                  </div>
+                </Link>
               </li>
             </ul>
           </li>
           <li>
-            <Link to="/job-offers">Job Offers</Link>
-          </li>
-          <li>
-            <Link to="/interviews">Interviews</Link>
+            <Link to="/Interviews">
+              <div>
+                <img src={interviews}></img>
+                <h1>Interviews</h1>
+              </div>
+            </Link>
             <ul>
               <li>
-                <Link to="/interviews/planning">Planning</Link>
+                <Link to="/Interviews/Planning">
+                  <div>
+                    <img src={go}></img>
+                    <h1>Planning</h1>
+                  </div>
+                </Link>
               </li>
               <li>
-                <Link to="/interviews/articles">Articles</Link>
+                <Link to="/Interviews/Articles">
+                  <div>
+                    <img src={go}></img>
+                    <h1>Articles</h1>
+                  </div>
+                </Link>
               </li>
             </ul>
-          </li>
-          <li>
-            <Link to="/logout">Log Out</Link>
           </li>
         </ul>
       </nav>
-    </div>
+    </SidebarContenair>
   );
 };
 

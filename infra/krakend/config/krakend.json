@@ -1,61 +1,8 @@
 {
+  "$schema": "https://www.krakend.io/schema/krakend.json",
   "version": 3,
   "name": "TechTalent - API Gateway",
   "timeout": "3000ms",
   "cache_ttl": "300s",
-  "endpoints": [
-    {
-      "endpoint": "/register/candidat",
-      "method": "POST",
-      "output_encoding": "json",
-      "extra_config": {
-        "github.com/devopsfaith/krakend/proxy": {
-          "static_headers": {
-            "Content-Type": "application/json"
-          }
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/register/candidat",
-          "host": ["http://user:7071"],
-          "method": "POST",
-          "encoding": "json"
-        }
-      ]
-    },
-    {
-      "endpoint": "/register/entreprise",
-      "method": "POST",
-      "output_encoding": "json",
-      "extra_config": {
-        "github.com/devopsfaith/krakend/proxy": {
-          "static_headers": {
-            "Content-Type": "application/json"
-          }
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/register/entreprise",
-          "host": ["http://user:7071"],
-          "method": "POST",
-          "encoding": "json"
-        }
-      ]
-    },
-    {
-      "endpoint": "/profil",
-      "method": "POST",
-      "output_encoding": "no-op",
-      "backend": [
-        {
-          "url_pattern": "/profil",
-          "host": ["http://user:7071"],
-          "method": "POST",
-          "encoding": "no-op"
-        }
-      ]
-    }
-  ]
+  "output_encoding": "json"
 }

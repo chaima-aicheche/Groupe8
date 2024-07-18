@@ -11,10 +11,13 @@ import {
   BtnEntrerpise,
   BtnCandidat
 } from '../styles/navbar.style';
-import logo from'../assets/logo.png';
+
 import {
   StyledLink
 } from '../styles/commun.style';
+
+import logo from'../assets/logo.png';
+
 
 const Navbar = () => {
 

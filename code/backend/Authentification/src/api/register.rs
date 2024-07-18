@@ -261,6 +261,7 @@ pub async fn register(data: web::Json<serde_json::Value>, db: web::Data<AppState
         return Ok(HttpResponse::BadRequest().json(ErrorDetail { message: "Format JSON invalide".to_string() }));
     };
 
+    println!("{:?}", role_data);
     let role_data = role_data.map_err(|_| HttpResponse::BadRequest().json(ErrorDetail { message: "Échec de l'analyse des données de rôle".to_string() }))?;
 
     let result = match role_data {

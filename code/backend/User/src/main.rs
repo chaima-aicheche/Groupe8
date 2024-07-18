@@ -1,6 +1,8 @@
 use actix_web::{App, HttpServer, web::Data};
 use mongodb::{Client as MongoClient, Collection};
 use mongodb::bson::{Document};
+use actix_web::http::header;
+use actix_cors::Cors;
 
 mod api;
 use api::{profil, create, app_state};
@@ -30,6 +32,13 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
         .app_data(Data::new(app_state.clone()))
+        .wrap(Cors::default()
+            .allow_any_origin()
+            .allowed_methods(vec!["GET", "POST", "DELETE"])
+            .allow_any_header()
+            .supports_credentials()
+            .max_age(3600)
+        )
         .service(create::create)
         .service(profil::profil)
     })

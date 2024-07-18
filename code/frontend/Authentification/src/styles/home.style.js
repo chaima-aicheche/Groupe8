@@ -128,14 +128,19 @@ export const FormHome = styled.section`
       height: 15%;
       width: 80%;
 
-      button {
+      a {
+          text-decoration: none;
+          display: flex;
           height: 80%;
           width: 100%;
           border-radius: 5px;
           border: 0;
+          align-items: center;
+          justify-content: center;
 
           background-color: rgb(22, 175, 204);
           color: white;
+            border: 2px solid rgba(22, 175, 204, 0);
 
           &:hover {
             background-color: rgba(22, 175, 204, 0.6);
