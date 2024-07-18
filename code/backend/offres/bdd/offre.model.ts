@@ -1,6 +1,6 @@
 import pool from '../bdd/pool.config';
 
-class CreationModel {
+class OffreModel {
 
     /**
      * Méthode pour récupérer les données d'un utilisateur via son email.
@@ -22,4 +22,4 @@ class CreationModel {
     }
 }
 
-export default CreationModel;
+export default OffreModel;

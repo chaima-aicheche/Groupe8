@@ -51,7 +51,7 @@ ALTER TABLE "entretien" ADD CONSTRAINT "fk_id_offre" FOREIGN KEY ("id_offre") RE
 
 
 -- DONNEES TEST POUR DEVELOPPEMENT STATITISTIQUES SUR CANDIDATURES --
-
+--
 -- INSERT INTO "candidatures" ("id_offre", "id_candidat", "statut", "date_candidature") VALUES
 --     (1, 1, 'En attente', '2023-07-01 10:00:00'),
 --     (2, 1, 'En attente', '2023-07-02 11:00:00'),

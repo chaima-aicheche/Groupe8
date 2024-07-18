@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 
 import {Request, Response} from "express";
-import creation from './routes/creation';
+import offre from './routes/offre';
 import statistiques from "./routes/statistiques";
 import candidatures from "./routes/candidatures";
 
@@ -19,10 +19,9 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 
-
-app.use("/creation", creation);
+app.use("/offre", offre);
 app.use("/getStats", statistiques);
-app.use("/getCandidatures", candidatures)
+app.use("/candidature",candidatures);
 
 
 const port = 8070;

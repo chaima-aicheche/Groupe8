@@ -2,7 +2,7 @@ import {Request, Response} from "express";
 // @ts-ignore
 import express from 'express';
 // @ts-ignore
-import CreationService from '../service/creation.service';
+import CreationService from '../service/offre.service';
 
 
 const router = express.Router();
@@ -10,11 +10,11 @@ const service = new CreationService();
 
 
 
-router.post("/", async (req: Request, res: Response) => {
+router.post("/create", async (req: Request, res: Response) => {
     console.log('totooooo');
     try{
-        // const response = await service.connect(req.body);
-        // res.status(200).send(response);
+        const response = await service.create(req.body);
+        res.status(200).send(response);
     }
     catch (e){
         res.status(500).send({message: "Une erreur technique a été rencontrée."});
