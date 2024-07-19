@@ -13,7 +13,7 @@ async fn main() -> std::io::Result<()> {
     //let client = MongoClient::with_uri_str("mongodb://localhost:27017") //dev
         .await
         .map_err(|_| std::io::Error::new(std::io::ErrorKind::Other, "Failed to connect to MongoDB"))?;
-    
+
     let database = client.database("db_auth");
     let collection_local: Collection<Document> = database.collection("users_local");
     let collection_oauth: Collection<Document> = database.collection("users_oauth");

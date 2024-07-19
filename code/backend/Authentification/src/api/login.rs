@@ -1,7 +1,8 @@
-use actix_web::{post, web, HttpResponse, Responder};
+use actix_web::{post, web, HttpResponse, Responder, cookie::Cookie, cookie::CookieBuilder, cookie::SameSite};
 use serde::{Deserialize, Serialize};
 use mongodb::bson::{doc};
 use bcrypt::verify;
+
 use jsonwebtoken::{encode, Header, EncodingKey};
 use std::time::{SystemTime, UNIX_EPOCH};
 use std::env;
@@ -17,7 +18,6 @@ pub struct LoginRequest {
 #[derive(Serialize)]
 struct LoginResponse {
     access_token: String,
-    refresh_token: String,
 }
 
 #[derive(Serialize)]
@@ -26,7 +26,7 @@ struct ErrorDetail {
 }
 
 #[derive(Serialize, Deserialize)]
-struct ClaimsAcces {
+struct ClaimsAccess {
     sub: String,
     role: String,
     user_id: String,
@@ -40,7 +40,7 @@ struct ClaimsRefresh {
 }
 
 #[post("/login")]
-pub async fn login( data: web::Json<LoginRequest>, db: web::Data<AppState>, ) -> impl Responder {
+pub async fn login(data: web::Json<LoginRequest>, db: web::Data<AppState>) -> impl Responder {
     let email = &data.email;
     let password = &data.password;
 
@@ -54,7 +54,7 @@ pub async fn login( data: web::Json<LoginRequest>, db: web::Data<AppState>, ) ->
                 let role: String = user.get_str("role").unwrap().to_string();
                 let user_id: String = user.get_str("user_id").unwrap().to_string();
 
-                let access_claims = ClaimsAcces {
+                let access_claims = ClaimsAccess {
                     sub: email.clone(),
                     role: role.clone(),
                     user_id: user_id.clone(),
@@ -71,7 +71,7 @@ pub async fn login( data: web::Json<LoginRequest>, db: web::Data<AppState>, ) ->
                 };
 
                 let secret_access = env::var("KeyAcces").unwrap_or_else(|_| "default_secret".to_string()); //prod
-                //let secret_access = "access"; //dev
+                //let secret_access = "access"; // Replace with your actual secret
                 let access_token = encode(
                     &Header::default(),
                     &access_claims,
@@ -79,17 +79,45 @@ pub async fn login( data: web::Json<LoginRequest>, db: web::Data<AppState>, ) ->
                 ).unwrap();
 
                 let secret_refresh = env::var("KeyRefresh").unwrap_or_else(|_| "default_secret".to_string()); //prod
-                //let secret_refresh = "refresh"; //dev
+                //let secret_refresh = "refresh"; // Replace with your actual secret
                 let refresh_token = encode(
                     &Header::default(),
                     &refresh_claims,
                     &EncodingKey::from_secret(secret_refresh.as_ref())
                 ).unwrap();
-
-                return HttpResponse::Ok().json(LoginResponse {
-                    access_token,
-                    refresh_token,
-                });
+                
+                    let cookie_main_domain = Cookie::build("refresh_token", refresh_token.clone())
+                    .domain(".techtalent.fr")
+                    .path("/")
+                    .http_only(true)
+                    .secure(false) // prod https .secure(true)
+                    .same_site(SameSite::None)
+                    .finish();
+        
+                let cookie_auth_subdomain = Cookie::build("refresh_token", refresh_token.clone())
+                    .domain("auth.techtalent.fr")
+                    .path("/")
+                    .http_only(true)
+                    .secure(false) // prod https .secure(true)
+                    .same_site(SameSite::None)
+                    .finish();
+        
+                let cookie_app_subdomain = Cookie::build("refresh_token", refresh_token.clone())
+                    .domain("app.techtalent.fr")
+                    .path("/")
+                    .http_only(true)
+                    .secure(false) // prod https .secure(true)
+                    .same_site(SameSite::None)
+                    .finish();
+            
+                let body = LoginResponse { access_token };
+                let mut response = HttpResponse::Ok().json(body);
+            
+                response.add_cookie(&cookie_main_domain).unwrap();
+                response.add_cookie(&cookie_auth_subdomain).unwrap();
+                response.add_cookie(&cookie_app_subdomain).unwrap();
+            
+                response
             } else {
                 return HttpResponse::Unauthorized().json(ErrorDetail {
                     message: "Invalid password".to_string(),
