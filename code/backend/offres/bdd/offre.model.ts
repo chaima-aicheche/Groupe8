@@ -56,6 +56,23 @@ class OffreModel {
         }
 
     }
+
+
+
+    async deleteOffer(idOffre: number){
+        const query = 'DELETE FROM "offres" WHERE "id" = $1 RETURNING *';
+        const values = [idOffre];
+
+        try {
+            const result = await pool.query(query, values);
+            console.log(`Suppression de l'offre n°\"${idOffre}\" réussie avec succès.`);
+            return result.rows[0];
+        } catch (error) {
+            console.error(`Echec de la suppression de l'offre n°\"${idOffre}\".`, error);
+            throw error;
+        }
+
+    }
 }
 
 export default OffreModel;

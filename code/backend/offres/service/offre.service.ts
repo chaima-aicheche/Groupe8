@@ -70,6 +70,29 @@ class OffreService {
         }
         return response;
     }
+
+
+    async deleteOffer(data: any){
+        let response;
+
+        const idOffre = Number(data.id_offre);
+        console.log(idOffre);
+
+        const checkDelete = await this.model.deleteOffer(idOffre);
+        if(!checkDelete){
+            response= {
+              code: 400,
+              message: "Aucune offre n'a pu être trouvée avec cet ID."
+            };
+            return response;
+        }
+
+        response = {
+          code: 200,
+          message: "Offre suprimée avec succés."
+        };
+        return response;
+    }
 }
 
 module.exports = OffreService;
