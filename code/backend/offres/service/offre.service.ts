@@ -7,7 +7,7 @@ class OffreService {
 
     constructor() {}
 
-    async create(data: any){
+    async createOffer(data: any){
         let response;
 
         if(!this.utils.controleData(data)){
@@ -35,6 +35,38 @@ class OffreService {
         response = {
             code: 200,
             message: "Offre créée avec succès."
+        }
+        return response;
+    }
+
+    async updateOffer(data: any){
+        let response;
+
+        if(!this.utils.controleData(data)){
+            response = {
+                code: 400,
+                message: "Merci de fournir des données correctes."
+            };
+            return response;
+        }
+
+        const idOffre = Number(data.id_offre);
+        const idRecruteur = Number(data.id_recruteur);
+        const titre = data.titre;
+        const adresse = data.adresse;
+        const codePostal = data.code_postal;
+        const ville = data.ville;
+        const pays = data.pays;
+        const domaine = data.domaine;
+        const description = data.description;
+        const image = data.image;
+
+
+        await this.model.updateOffer(idRecruteur, titre, adresse,codePostal ,ville ,pays ,domaine ,description ,image, idOffre);
+
+        response = {
+            code: 200,
+            message: "Offre Modifiée avec succès."
         }
         return response;
     }
