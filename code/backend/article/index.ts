@@ -6,6 +6,7 @@ import {Request, Response} from "express";
 import cors from 'cors';
 
 import article from './routes/article';
+import historique from './routes/historique';
 
 const app = express();
 
@@ -18,8 +19,8 @@ app.get("/", (req: Request, res: Response) => {
 
 
 
-app.use("/getArticle", article);
-app.use("/addArticle", article)
+app.use("/article", article);
+app.use("/historique", historique);
 
 
 const port = 8060;

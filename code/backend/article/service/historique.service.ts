@@ -1,8 +1,8 @@
-import ArticleModel from "../bdd/article.model";
+import HistoriqueModel from "../bdd/historique.model";
 import UtilsService from "../service/utils.service";
 
-class ArticleService {
-    model = new ArticleModel();
+class HistoriqueService {
+    model = new HistoriqueModel();
     utils: UtilsService = new UtilsService();
 
     constructor() {}
@@ -79,4 +79,4 @@ class ArticleService {
 
 }
 
-module.exports = ArticleService;
+module.exports = HistoriqueService;
