@@ -10,10 +10,27 @@ class OffreService {
     async create(data: any){
         let response;
 
-        // On contrôle les données reçues.
         if(!this.utils.controleData(data)){
-
+            response = {
+              code: 400,
+              message: "Merci de fournir des données correctes."
+            };
+            return response;
         }
+
+        const idRecruteur = Number(data.id_recruteur);
+        const titre = data.titre;
+        const adresse = data.adresse;
+        const codePostal = data.code_postal;
+        const ville = data.ville;
+        const pays = data.pays;
+        const domaine = data.domaine;
+        const description = data.description;
+        const image = data.image;
+        const datePublication = new Date().toISOString();
+
+
+        await this.model.createOffer(idRecruteur, titre, adresse,codePostal ,ville ,pays ,domaine ,description ,image, datePublication);
 
         response = {
             code: 200,

@@ -24,6 +24,7 @@ class CandidaturesService {
                 code: 400,
                 message: "Aucune candidature pour ce candidat."
             }
+            return response;
         }
 
         // On retourne les candidatures du candidat.
@@ -103,7 +104,6 @@ class CandidaturesService {
     async alreadyApplied(idOffre: number, idCandidat: number){
         const checkCandidature = await this.model.findCandidatureByIdOffreAndIdCandidat(idOffre, idCandidat);
 
-        console.log(checkCandidature);
         return checkCandidature.length < 1;
     }
 
