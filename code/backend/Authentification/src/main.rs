@@ -20,7 +20,7 @@ async fn main() -> std::io::Result<()> {
 
     let app_state = app_state::AppState {
         user_local: collection_local,
-        user_oauth: collection_oauth,
+        user_oauth: collection_oauth
     };
 
     HttpServer::new(move || {
