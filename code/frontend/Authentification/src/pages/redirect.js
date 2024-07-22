@@ -17,9 +17,9 @@ const Redirect = () => {
         document.body.classList.add('no-scroll-y');
     
         const timer = setTimeout(() => {
-          window.location.href = 'https://techtalent.fr';
+          //window.location.href = 'https://techtalent.fr';
         }, 250);
-    
+
         return () => {
           document.body.classList.remove('no-scroll-y');
           clearTimeout(timer);

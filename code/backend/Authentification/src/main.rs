@@ -27,7 +27,8 @@ async fn main() -> std::io::Result<()> {
         App::new()
         .app_data(Data::new(app_state.clone()))
         .wrap(Cors::default()
-            .allow_any_origin()
+            .allowed_origin("https://krakend:8080") //prod 
+            //.allow_any_origin() // dev
             .allowed_methods(vec!["GET", "POST", "DELETE"])
             .allow_any_header()
             .supports_credentials()

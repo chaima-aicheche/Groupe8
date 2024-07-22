@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:7070';
+const API_URL = 'https://auth.techtalent.fr/api';
 
 export const login = async (formData) => {
   try {

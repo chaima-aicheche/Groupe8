@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:7070';
+const API_URL = 'https://auth.techtalent.fr/api';
 
 const handleResponse = async (response) => {
     if (!response.ok) {
@@ -22,3 +22,4 @@ export const register = async (formData, role) => {
 
     return handleResponse(response);
 };
+

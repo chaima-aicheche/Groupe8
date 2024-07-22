@@ -86,37 +86,18 @@ pub async fn login(data: web::Json<LoginRequest>, db: web::Data<AppState>) -> im
                     &EncodingKey::from_secret(secret_refresh.as_ref())
                 ).unwrap();
                 
-                    let cookie_main_domain = Cookie::build("refresh_token", refresh_token.clone())
-                    .domain(".techtalent.fr")
-                    .path("/")
-                    .http_only(true)
-                    .secure(false) // prod https .secure(true)
-                    .same_site(SameSite::None)
-                    .finish();
-        
-                let cookie_auth_subdomain = Cookie::build("refresh_token", refresh_token.clone())
-                    .domain("auth.techtalent.fr")
-                    .path("/")
-                    .http_only(true)
-                    .secure(false) // prod https .secure(true)
-                    .same_site(SameSite::None)
-                    .finish();
-        
-                let cookie_app_subdomain = Cookie::build("refresh_token", refresh_token.clone())
-                    .domain("app.techtalent.fr")
-                    .path("/")
-                    .http_only(true)
-                    .secure(false) // prod https .secure(true)
-                    .same_site(SameSite::None)
-                    .finish();
-            
+                let cookie_main_domain = Cookie::build("refresh_token", refresh_token.clone())
+                .domain(".techtalent.fr")
+                .path("/")
+                .http_only(true)
+                .secure(true)
+                .same_site(SameSite::None)
+                .finish();
+
                 let body = LoginResponse { access_token };
                 let mut response = HttpResponse::Ok().json(body);
-            
+
                 response.add_cookie(&cookie_main_domain).unwrap();
-                response.add_cookie(&cookie_auth_subdomain).unwrap();
-                response.add_cookie(&cookie_app_subdomain).unwrap();
-            
                 response
             } else {
                 return HttpResponse::Unauthorized().json(ErrorDetail {

@@ -4,5 +4,55 @@
   "name": "TechTalent - API Gateway",
   "timeout": "3000ms",
   "cache_ttl": "300s",
-  "output_encoding": "json"
+  "output_encoding": "json",
+  "endpoints": [
+    {
+      "endpoint": "/api/login",
+      "method": "POST",
+      "backend": [
+        {
+          "host": [
+            "http://authentification:7070"
+          ],
+          "url_pattern": "/login"
+        }
+      ],
+      "output_encoding": "no-op",
+      "extra_config": {
+        "github.com/devopsfaith/krakend-cors": {
+          "allow_origins": ["https://auth.techtalent.fr"],
+          "allow_methods": ["POST"],
+          "allow_headers": ["Content-Type", "Authorization"],
+          "expose_headers": ["Set-Cookie"],
+          "allow_credentials": true,
+          "max_age": 3600
+        }
+      }
+    },
+    {
+      "endpoint": "/api/register",
+      "method": "POST",
+      "backend": [
+        {
+          "host": [
+            "http://authentification:7070"
+          ],
+          "url_pattern": "/register"
+        }
+      ],
+      "extra_config": {
+        "github.com/devopsfaith/krakend-cors": {
+          "allow_origins": ["https://auth.techtalent.fr"],
+          "allow_methods": ["POST"],
+          "allow_headers": ["Content-Type", "Authorization"],
+          "expose_headers": ["Content-Length", "Content-Type"],
+          "max_age": 3600
+        }
+      }
+    }
+  ],
+  "tls": {
+    "public_key": "/etc/krakend/certificatSSL/localhost.crt",
+    "private_key": "/etc/krakend/certificatSSL/localhost.pem"
+  }
 }
