@@ -16,6 +16,8 @@ import Redirect from './pages/redirect';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 
+import GitHub from './pages/github';
+
 import {
   AppBody,
 } from './styles/commun.style';
@@ -34,6 +36,7 @@ const AppContent = () => {
           <Route path="/RegisterCandidat" element={<RegisterCandidat />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
+          <Route path="/github" element={<GitHub />} />
         </Routes>
       </AppBody>
       <Footer />

@@ -1,4 +1,4 @@
-use actix_web::{post, web, HttpResponse, Responder, cookie::Cookie, cookie::CookieBuilder, cookie::SameSite};
+use actix_web::{post, web, HttpResponse, Responder, cookie::Cookie, cookie::SameSite};
 use serde::{Deserialize, Serialize};
 use mongodb::bson::{doc};
 use bcrypt::verify;
@@ -39,17 +39,36 @@ struct ClaimsRefresh {
     exp: usize,
 }
 
+/* Local
+{
+  "email": "user@example.com",
+  "password": "hashed_password_here",
+  "user_id": "unique_user_id",
+  "role": "user_role"
+}
+*/
+
+/* Sso
+{
+  "email": "user@example.com",
+  "sso_id": "unique_sso_user_id", // utiliser pour le password
+  "provider": "sso_provider_name"
+  "user_id": "unique_user_id",
+  "role": "user_role",
+}
+*/
+
 #[post("/login")]
 pub async fn login(data: web::Json<LoginRequest>, db: web::Data<AppState>) -> impl Responder {
     let email = &data.email;
     let password = &data.password;
 
-    let db_user = &db.user_local;
+    let db_user = &db.user;
 
-    match db_user.find_one(doc! { "email": email }, None).await {
+    match db_user.find_one(doc! { "email": email }).await {
         Ok(Some(user)) => {
             let stored_password: String = user.get_str("password").unwrap().to_string();
-
+            
             if verify(password, &stored_password).unwrap() {
                 let role: String = user.get_str("role").unwrap().to_string();
                 let user_id: String = user.get_str("user_id").unwrap().to_string();
@@ -71,7 +90,6 @@ pub async fn login(data: web::Json<LoginRequest>, db: web::Data<AppState>) -> im
                 };
 
                 let secret_access = env::var("KeyAcces").unwrap_or_else(|_| "default_secret".to_string()); //prod
-                //let secret_access = "access"; // Replace with your actual secret
                 let access_token = encode(
                     &Header::default(),
                     &access_claims,
@@ -79,7 +97,6 @@ pub async fn login(data: web::Json<LoginRequest>, db: web::Data<AppState>) -> im
                 ).unwrap();
 
                 let secret_refresh = env::var("KeyRefresh").unwrap_or_else(|_| "default_secret".to_string()); //prod
-                //let secret_refresh = "refresh"; // Replace with your actual secret
                 let refresh_token = encode(
                     &Header::default(),
                     &refresh_claims,
@@ -101,7 +118,7 @@ pub async fn login(data: web::Json<LoginRequest>, db: web::Data<AppState>) -> im
                 response
             } else {
                 return HttpResponse::Unauthorized().json(ErrorDetail {
-                    message: "Invalid password".to_string(),
+                    message: "Error".to_string(),
                 });
             }
         }

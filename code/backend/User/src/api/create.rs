@@ -66,6 +66,7 @@ enum RoleDataEnum {
     Entreprise(EntrepriseData),
 }
 
+
 trait RoleData {
     fn to_document(&self) -> Document;
     fn validate(&self) -> Result<(), String> {
@@ -195,6 +196,9 @@ pub async fn create(data: web::Json<serde_json::Value>, db: web::Data<AppState>)
     let role_data = if let Some(inner) = data.get("Candidat") {
         db_user = &db.candidat;
         serde_json::from_value(inner.clone()).map(RoleDataEnum::Candidat)
+    } else if let Some(inner) = data.get("SSO_Candidat") {
+        db_user = &db.candidat;
+        serde_json::from_value(inner.clone()).map(RoleDataEnum::Candidat)
     } else if let Some(inner) = data.get("Formateur") {
         db_user = &db.formateur;
         serde_json::from_value(inner.clone()).map(RoleDataEnum::Formateur)
@@ -236,7 +240,6 @@ pub async fn create(data: web::Json<serde_json::Value>, db: web::Data<AppState>)
             save_to_db(entreprise_data, db_user).await
         },
     };
-
 
     match result {
         Ok(id) => {

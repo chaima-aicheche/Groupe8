@@ -40,12 +40,57 @@
           "url_pattern": "/register"
         }
       ],
+      "output_encoding": "no-op",
       "extra_config": {
         "github.com/devopsfaith/krakend-cors": {
           "allow_origins": ["https://auth.techtalent.fr"],
           "allow_methods": ["POST"],
           "allow_headers": ["Content-Type", "Authorization"],
           "expose_headers": ["Content-Length", "Content-Type"],
+          "max_age": 3600
+        }
+      }
+    },
+    {
+      "endpoint": "/api/oauth/get_url",
+      "method": "GET",
+      "backend": [
+        {
+          "host": [
+            "http://authentification:7070"
+          ],
+          "url_pattern": "/oauth/get_url"
+        }
+      ],
+      "output_encoding": "no-op",
+      "extra_config": {
+        "github.com/devopsfaith/krakend-cors": {
+          "allow_origins": ["https://auth.techtalent.fr"],
+          "allow_methods": ["GET"],
+          "allow_headers": ["Content-Type", "Authorization"],
+          "expose_headers": ["Content-Length"],
+          "max_age": 3600
+        }
+      }
+    },
+    {
+      "endpoint": "/api/auth/github",
+      "method": "POST",
+      "backend": [
+        {
+          "host": [
+            "http://authentification:7070"
+          ],
+          "url_pattern": "/oauth/callback"
+        }
+      ],
+      "output_encoding": "no-op",
+      "extra_config": {
+        "github.com/devopsfaith/krakend-cors": {
+          "allow_origins": ["https://auth.techtalent.fr"],
+          "allow_methods": ["POST"],
+          "allow_headers": ["Content-Type", "Authorization"],
+          "expose_headers": ["Content-Length"],
           "max_age": 3600
         }
       }

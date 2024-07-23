@@ -35,6 +35,10 @@ const RegisterCandidateForm = () => {
     try {
       const data = await register(formData, "Candidat");
       setSuccess('Utilisateur enregistré avec succès ! ');
+
+      const timer = setTimeout(() => {
+        window.location.href = 'https://auth.techtalent.fr/';
+      }, 500);
     } catch (error) {
       setError('Erreur lors de l\'enregistrement');
       if (error.data) {

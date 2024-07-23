@@ -39,7 +39,6 @@ struct ErrorDetail {
 #[post("/refresh")]
 pub async fn refresh( data: web::Json<RefreshTokenRequest>, db: web::Data<Collection<mongodb::bson::Document>>, ) -> impl Responder {
     let secret_refresh = env::var("KeyAcces").unwrap_or_else(|_| "default_secret".to_string()); // prod
-    //let secret_refresh = "refresh"; //dev
 
     let decoded = decode::<ClaimsRefresh>(
         &data.refresh_token,
@@ -50,7 +49,7 @@ pub async fn refresh( data: web::Json<RefreshTokenRequest>, db: web::Data<Collec
     match decoded {
         Ok(claims) => {
             let email = claims.claims.sub.clone();
-            match db.find_one(doc! { "email": email.clone() }, None).await {
+            match db.find_one(doc! { "email": email.clone() }).await {
                 Ok(Some(user)) => {
                     let role: String = user.get_str("role").unwrap().to_string();
                     let user_id: String = user.get_str("user_id").unwrap().to_string();
@@ -63,7 +62,6 @@ pub async fn refresh( data: web::Json<RefreshTokenRequest>, db: web::Data<Collec
                     };
 
                     let secret_access = env::var("KeyRefresh").unwrap_or_else(|_| "default_secret".to_string()); //prod
-                    //let secret_access = "access"; //dev
                 
                     let access_token = encode(
                         &Header::default(),

@@ -1,7 +1,6 @@
 use actix_web::{App, HttpServer, web::Data};
 use mongodb::{Client as MongoClient, Collection};
 use mongodb::bson::{Document};
-use actix_web::http::header;
 use actix_cors::Cors;
 
 mod api;
@@ -10,9 +9,8 @@ use api::{profil, create, app_state};
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let client = MongoClient::with_uri_str("mongodb://db_user:27017/") //prod
-    //let client = MongoClient::with_uri_str("mongodb://localhost:27017") //dev
     .await
-    .map_err(|_| std::io::Error::new(std::io::ErrorKind::Other, "Failed to connect to MongoDB"))?;
+    .map_err(|err| std::io::Error::new(std::io::ErrorKind::Other, format!("Failed to connect to MongoDB: {}", err)))?;
     
     let database = client.database("db_user");
     let collection_formateur: Collection<Document> = database.collection("formateur");
@@ -35,7 +33,6 @@ async fn main() -> std::io::Result<()> {
         .wrap(Cors::default()
             .allowed_origin("https://krakend:8080") //prod 
             .allowed_origin("http://authentification:7070") //prod 
-            //.allow_any_origin() // dev
             .allowed_methods(vec!["GET", "POST", "DELETE"])
             .allow_any_header()
             .supports_credentials()

@@ -8,6 +8,7 @@ import {
 } from '../styles/home.style';
 
 import { login } from '../api/login';
+import { get_url } from '../api/oauth';
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -25,8 +26,6 @@ const Home = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
-
     try {
       const data = await login(formData);
       setSuccess('Connexion réussie !');
@@ -34,20 +33,21 @@ const Home = () => {
       const accessToken = data.access_token;
       sessionStorage.setItem('accessToken', accessToken);
 
-      const storedToken = sessionStorage.getItem('accessToken');
-      if (storedToken === accessToken) {
-        console.log('Le token d\'accès a été correctement stocké dans sessionStorage.');
-      } else {
-        console.error('Erreur : Le token d\'accès n\'a pas été correctement stocké dans sessionStorage.');
-      }
-
-      window.location.href =  'https://auth.techtalent.fr/Redirect'; //prod
-      //window.location.href = 'http://localhost:3001/Redirect'; //dev
+      window.location.href = 'https://auth.techtalent.fr/Redirect'; //prod
     } catch (error) {
       setError('Erreur lors de la connexion');
       console.error(error);
     }
   };
+
+  const gitHub = async () => {
+    try {
+      const url = await get_url();
+      window.location.href = url.authorization_url+"&scope=user:email+read:user"; //prod
+    } catch (error) {
+      setError('Erreur lors de la connexion');
+    }
+  }
 
   return (
     <ContainerHome>
@@ -88,6 +88,15 @@ const Home = () => {
           <div>
             <button onClick={handleSubmit}>
               Log in
+            </button>
+          </div>
+          <div>
+            <div />
+            <button onClick={gitHub}>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/640px-GitHub_Invertocat_Logo.svg.png"></img>
+              <p>
+                Continuer avec GitHub | Candidat
+              </p>
             </button>
           </div>
           <div>

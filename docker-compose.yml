@@ -60,7 +60,9 @@ services:
       - MONGO_db_URI=db_auth
       - KeyAccess=TechTalentAuthAcces
       - KeyRefresh=TechTalentAuthRefresh
-
+      - GITHUB_CLIENT_ID=Ov23liqNh2eh2SAuzIeQ
+      - GITHUB_CLIENT_SECRET=249114258a2bf9254d181a0aa8b3cf81ecc04ca0
+      - GITHUB_REDIRECT_URI=https://auth.techtalent.fr/github
   db_auth:
     image: mongo:latest
     container_name: db_auth

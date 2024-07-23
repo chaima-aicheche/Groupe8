@@ -1,11 +1,12 @@
 use actix_web::{App, HttpServer, web::Data};
 use mongodb::{Client as MongoClient, Collection};
 use mongodb::bson::{Document};
-use actix_web::http::header;
 use actix_cors::Cors;
 
 mod api;
 use api::{login, register, refresh, app_state};
+
+use api::oAuth::{get_url, callback};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -15,12 +16,10 @@ async fn main() -> std::io::Result<()> {
         .map_err(|_| std::io::Error::new(std::io::ErrorKind::Other, "Failed to connect to MongoDB"))?;
 
     let database = client.database("db_auth");
-    let collection_local: Collection<Document> = database.collection("users_local");
-    let collection_oauth: Collection<Document> = database.collection("users_oauth");
+    let collection: Collection<Document> = database.collection("users");
 
     let app_state = app_state::AppState {
-        user_local: collection_local,
-        user_oauth: collection_oauth
+        user: collection,
     };
 
     HttpServer::new(move || {
@@ -28,7 +27,6 @@ async fn main() -> std::io::Result<()> {
         .app_data(Data::new(app_state.clone()))
         .wrap(Cors::default()
             .allowed_origin("https://krakend:8080") //prod 
-            //.allow_any_origin() // dev
             .allowed_methods(vec!["GET", "POST", "DELETE"])
             .allow_any_header()
             .supports_credentials()
@@ -37,6 +35,8 @@ async fn main() -> std::io::Result<()> {
         .service(login::login)
         .service(register::register)
         .service(refresh::refresh)
+        .service(get_url::get_url)
+        .service(callback::callback)
     })
     .bind("0.0.0.0:7070")?
     .run()

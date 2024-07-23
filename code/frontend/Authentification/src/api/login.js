@@ -1,8 +1,6 @@
-const API_URL = 'https://auth.techtalent.fr/api';
-
 export const login = async (formData) => {
   try {
-    const response = await fetch(`${API_URL}/login`, {
+    const response = await fetch(`/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

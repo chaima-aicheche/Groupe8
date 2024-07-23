@@ -128,7 +128,7 @@ export const FormHome = styled.section`
       height: 15%;
       width: 80%;
 
-      a {
+      a, button {
           text-decoration: none;
           display: flex;
           height: 80%;
@@ -147,6 +147,38 @@ export const FormHome = styled.section`
             border: 2px solid rgba(22, 175, 204, 0.6);
             color: black;
           }
+      }
+    }
+
+    div:nth-child(4) {
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      width: 80%;
+
+      div:first-child {
+        border: none;
+        height: 1px;
+        background-color: #ccc;
+        margin-bottom: 10px;
+      }
+
+      img {
+        width: 25px;
+        height: 25px;
+        margin: 5px;
+      }
+
+      button {
+        display: flex;
+        flex-direction: row;
+
+        width: auto;
+
+        text-align: center;
+        align-items: center;
       }
     }
 
