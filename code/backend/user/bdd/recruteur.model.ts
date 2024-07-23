@@ -9,9 +9,9 @@ class RecruteurModel {
 
         try {
             result = await pool.query(query, values);
-            console.log(`Données du ${typeUser} \"${email}\" récupérées avec succès.`);
+            console.log(`Données du ${typeUser} "${email}" récupérées avec succès.`);
         } catch (error) {
-            console.error(`Echec de la récupération des données du ${typeUser} \"${email}\".`, error);
+            console.error(`Echec de la récupération des données du ${typeUser} "${email}".`, error);
             throw error;
         }
         return result.rows.length > 0;
@@ -30,13 +30,13 @@ class RecruteurModel {
         {
             result = await pool.query(query, values);
             if(result.rows.length > 0)
-                response = {code : 200, message : `Recruteur \"${email}\" enregistré avec succès.`};
+                response = {code : 200, message : `Recruteur "${email}" enregistré avec succès.`};
             else
-                response = {code : 400, message : `Le recruteur \"${email}\" n\'a pas pu être enregistré pour une raison inconnue.`};
+                response = {code : 400, message : `Le recruteur "${email}" n\'a pas pu être enregistré pour une raison inconnue.`};
         }
         catch (error)
         {
-            console.error(`Echec de la récupération des données du recruteur \"${email}\".`, error);
+            console.error(`Echec de la récupération des données du recruteur "${email}".`, error);
             throw error;
         }
 
@@ -56,13 +56,13 @@ class RecruteurModel {
         {
             result = await pool.query(query, values);
             if(result.rowCount != null && result.rowCount > 0)
-                response = {code : 200, message : `Recruteur \"${email}\" mis à jour avec succès.`};
+                response = {code : 200, message : `Recruteur "${email}" mis à jour avec succès.`};
             else
-                response = {code : 400, message : `Le recruteur \"${email}\" n\'a pas pu être mis à jour pour une raison inconnue.`};
+                response = {code : 400, message : `Le recruteur "${email}" n\'a pas pu être mis à jour pour une raison inconnue.`};
         }
         catch (error)
         {
-            console.error(`Echec de la mise à jour des données du recruteur \"${email}\".`, error);
+            console.error(`Echec de la mise à jour des données du recruteur "${email}".`, error);
             throw error;
         }
 

@@ -18,6 +18,7 @@ router.post("/create", async (req: Request, res: Response) => {
         res.status(200).send(response);
     }
     catch (e){
+        console.log(e);
         res.status(500).send({message: "Une erreur technique a été rencontrée."});
     }
 });
@@ -29,6 +30,7 @@ router.post("/update", async (req: Request, res: Response) => {
         res.status(200).send(response);
     }
     catch (e){
+        console.log(e);
         res.status(500).send({message: "Une erreur technique a été rencontrée."});
     }
 });
