@@ -15,14 +15,14 @@ class ServiceRegister
      */
     async IsUserInDb(email : string)
     {
-        let response: { code: number; message: string; };
+        let response: { code: number; message: string};
 
         if(this.IsEmailOk(email.trim()))
         {
             if(await this.requeteModel.IsUserInDb(email))
                 response = {
                     code: 400,
-                    message: "L'utilisateur existe déjà'."
+                    message: "L'utilisateur existe déjà."
                 };
             else
                 response = {
@@ -34,7 +34,7 @@ class ServiceRegister
         {
             response = {
                 code: 400,
-                message: "L'email est invalide'."
+                message: "L'email est invalide."
             };
         }
 
@@ -50,7 +50,7 @@ class ServiceRegister
      */
     async InsertUserInDb(email : string, password : string, type : string)
     {
-        let response: { code: number; message: string; } = { code: 400, message: "Service : Une erreur technique a été rencontrée." };
+        let response : {code : number, message: string};
 
         let isPasswordOk = this.IsPasswordOk(password);
         let isTypeOk = type != null && type != "";

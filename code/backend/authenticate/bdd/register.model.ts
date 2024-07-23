@@ -39,7 +39,6 @@ class RegisterModel
         try
         {
             const result = await pool.query(query, values);
-            console.log(result);
             // return result.rows;
         }
         catch(error)

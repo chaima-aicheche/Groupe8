@@ -1,3 +1,7 @@
+// @ts-ignore
+import bcrypt from 'bcrypt';
+
+import utilsService from '../service/utils.service';
 import UpdateModel from "../bdd/update.model";
 import UtilsService from "../service/utils.service";
 
@@ -33,7 +37,7 @@ class UpdateService {
             if(await this.model.IsUserInDb(email))
                 response = {
                     code: 400,
-                    message: "L'utilisateur existe déjà'."
+                    message: "L'utilisateur existe déjà."
                 };
             else
                 response = {
@@ -45,7 +49,7 @@ class UpdateService {
         {
             response = {
                 code: 400,
-                message: "L'email est invalide'."
+                message: "L'email est invalide."
             };
         }
 
@@ -58,19 +62,36 @@ class UpdateService {
      * @param newEmail
      * @constructor
      */
-    async UpdateUserInDb(oldEmail : string, newEmail : string)
+    async UpdateUserInDb(oldEmail : string, newEmail : string, password : string)
     {
         let response: { code: number; message: string; };
 
-        if(await this.model.IsUserInDb(newEmail))
-            response = await this.model.UpdateUserInDb(oldEmail, newEmail);
+        if(await this.IsPasswordOk(password, oldEmail))
+            if(await this.model.IsUserInDb(oldEmail))
+                response = await this.model.UpdateUserInDb(oldEmail, newEmail);
+            else
+                response = {
+                    code: 400,
+                    message: "L'utilisateur n'existe pas."
+                };
         else
             response = {
                 code: 400,
-                message: "L'utilisateur n'existe pas."
+                message: "Mauvais mot de passe."
             };
 
+
         return response;
+    }
+
+    private async IsPasswordOk(password: string, email : string)
+    {
+        const passwordDB : string = await this.model.GetPassordUser(email);
+
+        if(password == "KO")
+            return false;
+        else
+            return await bcrypt.compare(password, passwordDB);
     }
 }
 

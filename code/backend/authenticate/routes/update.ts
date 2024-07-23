@@ -15,10 +15,11 @@ router.get("/", async () => {
 router.post("/candidat", async (req: Request, res: Response) =>
 {
     try{
-        const response = await service.UpdateUserInDb(req.body.email, "candidat");
+        const response = await service.UpdateUserInDb(req.body.oldEmail, req.body.newEmail, req.body.password);
         res.status(200).send(response);
     }
     catch (e){
+        console.log(e);
         res.status(500).send({message: "Une erreur technique a été rencontrée."});
     }
 });
@@ -26,21 +27,23 @@ router.post("/candidat", async (req: Request, res: Response) =>
 router.post("/recruteur", async (req: Request, res: Response) =>
 {
     try{
-        const response = await service.UpdateUserInDb(req.body.email, "recruteur");
+        const response = await service.UpdateUserInDb(req.body.oldEmail, req.body.newEmail, req.body.password);
         res.status(200).send(response);
     }
     catch (e){
-        res.status(500).send({message: "Une erreur technique a été rencontrée."});
+        console.log(e);
+        res.status(500).send({message: "Une erreur technique a été rencontrée"});
     }
 });
 
 router.post("/formateur", async (req: Request, res: Response) =>
 {
     try{
-        const response = await service.UpdateUserInDb(req.body.email, "formateur");
+        const response = await service.UpdateUserInDb(req.body.oldEmail, req.body.newEmail, req.body.password);
         res.status(200).send(response);
     }
     catch (e){
+        console.log(e);
         res.status(500).send({message: "Une erreur technique a été rencontrée."});
     }
 });

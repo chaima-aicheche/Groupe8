@@ -52,6 +52,27 @@ class UpdateModel
             throw error;
         }
     }
+
+    async GetPassordUser(email: string)
+    {
+        const query = 'SELECT password FROM credentials WHERE "email" = $1';
+        const values : string[] = [email];
+
+        try
+        {
+            const result = await pool.query(query, values);
+
+            if(result.rowCount != null && result.rowCount > 0)
+                return result.rows[0].password;
+            else
+                return "KO";
+        }
+        catch(error)
+        {
+            console.error("", error);
+            throw error;
+        }
+    }
 }
 
 export default UpdateModel;
