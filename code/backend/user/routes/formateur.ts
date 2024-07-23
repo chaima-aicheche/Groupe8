@@ -2,20 +2,19 @@ import {Request, Response} from "express";
 // @ts-ignore
 import express from 'express';
 // @ts-ignore
-import CandidatService from '../service/candidat.service';
+import FormateurService from '../service/formateur.service';
 
 const router = express.Router();
-const service = new CandidatService();
+const service = new FormateurService();
 
 
 router.get("/", (req: Request, res: Response) => {
-    res.json({message: "Bonjour from candidat"});
+    res.json({message: "Bonjour from Formateur"});
 });
 
 router.post("/create", async (req: Request, res: Response) => {
     try{
-        const response = await service.InsertCandidatInDb(req.body.email, req.body.num_telephone, req.body.nom, req.body.prenom
-            , req.body.adresse, req.body.code_postal, req.body.ville, req.body.pays, req.body.genre, req.body.cv);
+        const response = await service.InsertFormateurInDb(req.body.email, req.body.nom, req.body.prenom);
         res.status(200).send(response);
     }
     catch (e){
@@ -26,9 +25,8 @@ router.post("/create", async (req: Request, res: Response) => {
 
 router.post("/update", async (req: Request, res: Response) => {
     try{
-        const response = await service.UpdateCandidatInDb(req.body.oldEmail, req.body.newEmail, req.body.num_telephone
-            , req.body.nom, req.body.prenom, req.body.adresse, req.body.code_postal, req.body.ville, req.body.pays
-            , req.body.genre, req.body.cv, req.body.idUser);
+        const response = await service.UpdateFormateurInDb(req.body.oldEmail, req.body.newEmail, req.body.nom
+            , req.body.prenom, req.body.idUser);
         res.status(200).send(response);
     }
     catch (e){
