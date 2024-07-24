@@ -11,4 +11,43 @@ export default class UtilsService {
     }
 
 
+    /**
+     * Méthode pour contrôler qu'aucun champ de soit vide ou null.
+     * @param data
+     * @return boolean
+     */
+    controleDataCreation(data: any){
+
+        const requiredFields = [
+            'id_formateur',
+            'titre',
+            'categorie',
+            'description',
+            'contenu',
+            'image'
+        ];
+
+        return requiredFields.every(field => data[field] != null && data[field] !== "");
+    }
+
+
+    controleDataUpdate(data: any){
+
+        const requiredFields = [
+            'id_article',
+            'titre',
+            'categorie',
+            'description',
+            'contenu',
+            'image'
+        ];
+
+        return requiredFields.every(field => data[field] != null && data[field] !== "");
+    }
+
+
+
+
+
+
 }

@@ -2,64 +2,109 @@ import pool from '../bdd/pool.config';
 
 class ArticleModel {
 
+
     /**
-     * Méthode pour récupérer les données d'un utilisateur via son email.
-     * @param email
-     * @return : id, email, password et role de l'utilisateur.
+     * Méthode pour créer une offre.
+     * @param idFormateur
+     * @param titre
+     * @param categorie
+     * @param description
+     * @param contenu
+     * @param image
+     * @param datePublication
      */
-    async getLatestArticle(id_candidat: number){
-        const query = 'SELECT * FROM historique_lecture WHERE "id_candidat" = $1';
-        const values = [id_candidat];
+    async createArticle(idFormateur: number, titre: string, categorie: string, description: string, contenu: string, image: string, datePublication: string){
+        const query = 'INSERT INTO "article" ("id_formateur", "titre", "categorie", "description", "contenu", "image", "date_publication") VALUES ($1, $2, $3, $4, $5, $6, $7)';
+        const values = [idFormateur, titre, categorie, description, contenu, image, datePublication];
 
         try {
             const result = await pool.query(query, values);
-            console.log(`Données de l'utilisateur \"${id_candidat}\" récupérées avec succès.`);
-            return result.rows[0];
+            console.log(`Création de l'article \"${titre}\" réussie avec succès.`);
+            return result.rows;
         } catch (error) {
-            console.error(`Echec de la récupération des données de l'utilisateur \"${id_candidat}\" récupérées avec succès.`, error);
+            console.error(`Echec de la création de l'article \"${titre}\".`, error);
             throw error;
         }
     }
 
 
     /**
-     * Méthode ajouter un article dans l'historique pour un candidat.
-     * @return : id, email, password et role de l'utilisateur.
-     * @param idCandidat
+     * Méthode pour modifier un article existant.
      * @param idArticle
-     * @param dateLecture
+     * @param titre
+     * @param categorie
+     * @param description
+     * @param contenu
+     * @param image
      */
-    async addReadedArticle( idArticle: number, idCandidat: number, dateLecture: any){
-        const query = 'INSERT INTO "historique_lecture" ("id_article", "id_candidat", "date_lecture") VALUES ($1, $2, $3)';
-        const values = [idArticle, idCandidat, dateLecture];
+    async updateArticle(idArticle: number, titre: string, categorie: string, description: string, contenu: string, image: string){
+        const query = 'UPDATE "article" SET "titre"=$1, "categorie"=$2, "description"=$3, "contenu"=$4, "image"=$5 WHERE "id"=$6';
+        const values = [titre, categorie, description, contenu, image, idArticle];
 
         try {
             const result = await pool.query(query, values);
-            console.log(`Ajout d'un article pour l'historique du candidat \"${idCandidat}\" effectué avec succès.`);
-            return result.rows[0];
+            console.log(`Modification de l'article \"${titre}\" réussie avec succès.`);
+            return result.rows;
         } catch (error) {
-            console.error(`Echec de l'ajout d'un article pour l'historique du candidat \"${idCandidat}\".`, error);
+            console.error(`Echec de la modification de l'article \"${titre}\".`, error);
             throw error;
         }
     }
 
+
     /**
-     * Méthode modifier un article dans l'historique concernant un candidat.
-     * @return : id, email, password et role de l'utilisateur.
-     * @param idCandidat
+     * Méthode pour supprimer un article dans la table article.
      * @param idArticle
-     * @param dateLecture
      */
-    async updateReadedArticle( idArticle: number, idCandidat: number, dateLecture: any){
-        const query = 'UPDATE "historique_lecture" SET "id_article" = $1, "date_lecture" = $3 WHERE "id_candidat" = $2';
-        const values = [idArticle, idCandidat, dateLecture];
+    async deleteArticle(idArticle: number){
+        const query = 'DELETE FROM "article" WHERE "id" = $1 RETURNING *';
+        const values = [idArticle];
 
         try {
             const result = await pool.query(query, values);
-            console.log(`Modification d'un article pour l'historique du candidat \"${idCandidat}\" effectué avec succès.`);
+            console.log(`Suppression de l'article n°${idArticle} réussie avec succès.`);
             return result.rows[0];
         } catch (error) {
-            console.error(`Echec de la modification d'un article pour l'historique du candidat \"${idCandidat}\".`, error);
+            console.error(`Echec de la suppression de l'article n°${idArticle}.`, error);
+            throw error;
+        }
+
+    }
+
+
+    /**
+     * Méthode pour supprimer toutes les lignes où est renseigné le même idArticle dans la table historique_lecture.
+     * @param idArticle
+     */
+    async deleteHistorique(idArticle: number){
+        const query = 'DELETE FROM "historique_lecture" WHERE "id_article" = $1 RETURNING *';
+        const values = [idArticle];
+
+        try {
+            const result = await pool.query(query, values);
+            console.log(`Suppression de l'article n°${idArticle} dans l'historique réussie avec succès.`);
+            return result.rows[0];
+        } catch (error) {
+            console.error(`Echec de la suppression de l'article n°${idArticle} dans l'historique.`, error);
+            throw error;
+        }
+    }
+
+
+    /**
+     * Méthode pour récupérer toutes les données d'un article.
+     * @param idArticle
+     */
+    async getArticle(idArticle: number){
+        const query = 'SELECT * FROM "article" WHERE "id" = $1';
+        const values = [idArticle];
+
+        try {
+            const result = await pool.query(query, values);
+            console.log(`Récupération de l'article n°${idArticle} réussie avec succès.`);
+            return result.rows;
+        } catch (error) {
+            console.error(`Echec de la récupération de l'article n°${idArticle}.`, error);
             throw error;
         }
     }
