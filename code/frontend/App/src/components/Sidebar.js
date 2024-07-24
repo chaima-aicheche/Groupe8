@@ -13,6 +13,8 @@ import interviews from '../assets/interviews.png';
 import logoLogout from '../assets/logout.png';
 import go from '../assets/go.png';
 
+//<Link to="/Profil/Entreprise ou Candidat">
+
 const Sidebar = () => {
   return (
     <SidebarContenair>
@@ -27,7 +29,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/Profil">
+            <Link to="/Profil/Candidat">
               <div>
                 <img src={profil}></img>
                 <h1>Profil</h1>
@@ -36,10 +38,10 @@ const Sidebar = () => {
           </li>
           <li>
             <Link to="/JobOffers">
-            <div>
-              <img src={offers}></img>
-              <h1>Job Offers</h1>
-            </div>
+              <div>
+                <img src={offers}></img>
+                <h1>Job Offers</h1>
+              </div>
             </Link>
           </li>
           <li>

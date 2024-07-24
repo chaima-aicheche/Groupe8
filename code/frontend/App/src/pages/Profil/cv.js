@@ -6,7 +6,10 @@ import {
 const ProfilCv = () => {
 
     return (
-        <p>Cv</p>
+        <div>
+            <p>Cv</p>
+            <button>upload</button>
+        </div>
     );
 }
 

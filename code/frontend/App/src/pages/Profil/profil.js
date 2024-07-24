@@ -33,6 +33,7 @@ const Profil = () => {
                         <p>adresse</p>
                     </div>
                 </InfoHeaderProfil>
+                <button>Edit Profil</button>
             </ContainerHeaderProfil>
         </HeaderProfil>
         <NavProfil>

@@ -6,7 +6,21 @@ import {
 const ProfilEntreprise = () => {
 
     return (
-        <p>Profil Entreprise</p>
+        <div>
+            <div>
+                <button>Edit info</button>
+            </div>
+            <div>
+                <input type="text" placeholder="Enter text here" />
+                <input type="text" placeholder="Enter text here" />
+                <input type="text" placeholder="Enter text here" />
+            </div>
+            <div>
+                <input type="text" placeholder="Enter text here" />
+                <input type="text" placeholder="Enter text here" />
+                <input type="text" placeholder="Enter text here" />
+            </div>
+        </div>
     );
 }
 
