@@ -1,9 +1,11 @@
-FROM nginx:latest
+FROM openresty/openresty:alpine
 
-COPY ./certificatSSL/autosigned/techtalent.crt /etc/nginx/certificatSSL/techtalent.crt
-COPY ./certificatSSL/autosigned/techtalent.csr /etc/nginx/certificatSSL/techtalent.csr
-COPY ./certificatSSL/autosigned/techtalent.key /etc/nginx/certificatSSL/techtalent.key
+COPY ./certificatSSL/autosigned/techtalent.crt /usr/local/openresty/nginx/conf/certificatSSL/techtalent.crt
+COPY ./certificatSSL/autosigned/techtalent.csr /usr/local/openresty/nginx/conf/certificatSSL/techtalent.csr
+COPY ./certificatSSL/autosigned/techtalent.key /usr/local/openresty/nginx/conf/certificatSSL/techtalent.key
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD mkdir -p /var/log/nginx && \
+    touch /var/log/nginx/access.log /var/log/nginx/error.log && \
+    openresty -g "daemon off;"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -23,6 +23,36 @@ import {
 
 const AppContent = () => {
   const location = useLocation();
+
+  const refreshTokenInterval = 10 * 60 * 1000; // 10 minutes
+  const accesTokenInterval = 5 * 60 * 1000; // 5 minutes
+  useEffect(() => {
+    const refreshAccessToken = async () => {
+      try {
+        const response = await fetch('/api/refreshtoken', {
+          method: 'POST',
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to refresh access token');
+        }
+
+        const data = await response.json();
+        if (data.accessToken) {
+          localStorage.setItem('accessToken', data.accessToken);
+        } else {
+          throw new Error('Failed to refresh access token');
+        }
+      } catch (error) {
+        console.error('Error refreshing access token:', error);
+        window.location.href = 'https://auth.techtalent.fr';
+      }
+    };
+
+    const interval = setInterval(refreshAccessToken, refreshTokenInterval);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>

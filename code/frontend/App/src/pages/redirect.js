@@ -7,20 +7,23 @@ import {
 
 import logo from'../assets/logo.png';
 
+import { logout } from '../api/logout';
+
 const Redirect = () => {
 
     useEffect(() => {
-        document.body.classList.add('no-scroll-y');
+
+        sessionStorage.removeItem("accessToken");
+        try {
+          logout();
+        } catch (err) {
+          setError('Une erreur est survenue lors du logout.');
+        }
     
         const timer = setTimeout(() => {
           window.location.href = 'https://techtalent.fr';
-        }, 250);
-    
-        return () => {
-          document.body.classList.remove('no-scroll-y');
-          clearTimeout(timer);
-        };
-      }, []);
+        }, 500);
+    }, []);
 
   return (
     <ContainerRedirect>

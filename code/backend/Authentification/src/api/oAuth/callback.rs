@@ -92,24 +92,18 @@ async fn get_primary_email(access_token: &str) -> Result<String, String> {
         .build()
         .map_err(|e| e.to_string())?;
 
-    println!("Client créé avec succès");
+    println!("Client créé avec succès token {}", access_token);
 
     let response = client
         .get("https://api.github.com/user/emails")
-        .header("Authorization", format!("token {}", access_token))
+        .header("Authorization", format!("Bearer {}", access_token))
         .header("Accept", "application/vnd.github.v3+json")
+        .header("User-Agent", "Tech Talent")
         .send()
         .await
         .map_err(|e| e.to_string())?;
 
     println!("Réponse reçue de GitHub");
-
-    if !response.status().is_success() {
-        let status_code = response.status();
-        let error_message = format!("Erreur de réponse de GitHub: Statut {}", status_code);
-        println!("{}", error_message);
-        return Err(error_message);
-    }
 
     let response_text = response.text().await.map_err(|e| e.to_string())?;
     println!("Texte de la réponse: {}", response_text);
@@ -139,8 +133,9 @@ async fn get_sso_id(access_token: &str) -> Result<String, String> {
 
     let response = client
         .get("https://api.github.com/user")
-        .header("Authorization", format!("token {}", access_token))
+        .header("Authorization", format!("Bearer {}", access_token))
         .header("Accept", "application/vnd.github.v3+json")
+        .header("User-Agent", "Tech Talent")
         .send()
         .await
         .map_err(|e| e.to_string())?;
@@ -248,5 +243,4 @@ async fn callback(body: web::Json<AuthRequest>, db: web::Data<AppState>) -> impl
 
     HttpResponse::Ok().json(response)
 }
-
 

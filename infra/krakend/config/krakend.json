@@ -94,6 +94,50 @@
           "max_age": 3600
         }
       }
+    },
+    {
+      "endpoint": "/api/logout",
+      "method": "POST",
+      "backend": [
+        {
+          "host": [
+            "http://authentification:7070"
+          ],
+          "url_pattern": "/logout"
+        }
+      ],
+      "output_encoding": "no-op",
+      "extra_config": {
+        "github.com/devopsfaith/krakend-cors": {
+          "allow_origins": ["https://app.techtalent.fr", "https://formation.techtalent.fr", "https://auth.techtalent.fr", "https://techtalent.fr"],
+          "allow_methods": ["POST"],
+          "allow_headers": ["Content-Type", "Authorization", "Set-Cookie"],
+          "expose_headers": ["Content-Length", "Set-Cookie"],
+          "max_age": 3600
+        }
+      }
+    },
+    {
+      "endpoint": "/api/refreshtoken",
+      "method": "POST",
+      "backend": [
+        {
+          "host": [
+            "http://authentification:7070"
+          ],
+          "url_pattern": "/refresh"
+        }
+      ],
+      "output_encoding": "no-op",
+      "extra_config": {
+        "github.com/devopsfaith/krakend-cors": {
+          "allow_origins": ["https://app.techtalent.fr", "https://formation.techtalent.fr", "https://auth.techtalent.fr", "https://techtalent.fr", "http://localhost"],
+          "allow_methods": ["POST"],
+          "allow_headers": ["Cookie"],
+          "expose_headers": ["Content-Length", "Content-Type", "Set-Cookie"],
+          "allow_credentials": true
+        }
+      }
     }
   ],
   "tls": {

@@ -1,6 +1,7 @@
 pub mod login;
 pub mod register;
-pub mod refresh;
+pub mod refreshtoken;
+pub mod logout;
 
 pub mod app_state;
 
