@@ -14,6 +14,7 @@ import Profil from './pages/Profil/profil';
 import ProfilCandidat from './pages/Profil/profil';
 import ProfilEntreprise from './pages/Profil/candidat';
 import ProfilCv from './pages/Profil/cv';
+import Notif from './pages/Notif';
 import Test from './pages/Test';
 
 import {
@@ -63,7 +64,7 @@ const AppContent = () => {
           <Routes>
             <Route path="/" element={<Test />} />
             <Route path="/Redirect" element={<Redirect />} />
-            <Route path="/Notif" element={<Test />} />
+            <Route path="/Notif" element={<Notif />} />
             <Route path="/Profil/*" element={<Profil />}>
                 <Route path="Candidat" element={<ProfilCandidat />} />
                 <Route path="CuriculumVitae" element={<ProfilEntreprise />} />

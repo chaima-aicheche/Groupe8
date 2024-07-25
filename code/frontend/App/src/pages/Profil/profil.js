@@ -33,7 +33,9 @@ const Profil = () => {
                         <p>adresse</p>
                     </div>
                 </InfoHeaderProfil>
-                <button>Edit Profil</button>
+                <div>
+                    <button>Edit Profil</button>
+                </div>
             </ContainerHeaderProfil>
         </HeaderProfil>
         <NavProfil>

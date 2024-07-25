@@ -23,6 +23,14 @@ export const ContainerHeaderProfil = styled.div`
     flex-direction: column;
     height: 100%;
     width: 100%;
+
+    div:last-child {
+        margin: 10px;
+
+        button {
+            width: 100px;
+        }
+    }
 `;
 
 export const InfoHeaderProfil = styled.div`
@@ -48,7 +56,6 @@ export const InfoHeaderProfil = styled.div`
     }
 
     div:last-child {
-        background-color: transparent;
         width: 35%;
         padding-top: 70px;
     }

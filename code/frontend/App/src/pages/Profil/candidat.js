@@ -13,7 +13,7 @@ const ProfilCandidat = () => {
     return (
         <ContainerCandidat>
             <EditProfilCandidat>
-                <button>Edit info</button>
+                <button>Edit</button>
             </EditProfilCandidat>
             <InputContainerC>
                 <InputContainerCandidat>

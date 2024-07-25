@@ -1,26 +1,52 @@
 import React, { useEffect } from 'react';
 
 import {
-} from '../../styles/Profil/Profil.entreprise.style';
+    ContainerCandidat,
+    InputContainerC,
+    InputContainerCandidat,
+    InputSubContainerCandidat,
+    EditProfilCandidat
+} from '../../styles/Profil/Profil.candidat.style';
+
 
 const ProfilEntreprise = () => {
 
     return (
-        <div>
-            <div>
-                <button>Edit info</button>
-            </div>
-            <div>
-                <input type="text" placeholder="Enter text here" />
-                <input type="text" placeholder="Enter text here" />
-                <input type="text" placeholder="Enter text here" />
-            </div>
-            <div>
-                <input type="text" placeholder="Enter text here" />
-                <input type="text" placeholder="Enter text here" />
-                <input type="text" placeholder="Enter text here" />
-            </div>
-        </div>
+        <ContainerCandidat>
+            <EditProfilCandidat>
+                <button>Edit</button>
+            </EditProfilCandidat>
+            <InputContainerC>
+                <InputContainerCandidat>
+                    <InputSubContainerCandidat>
+                        <p>Email</p>
+                        <input type="text"  />
+                    </InputSubContainerCandidat>
+                    <InputSubContainerCandidat>
+                        <p>Code Postal</p>
+                        <input type="text"  />
+                    </InputSubContainerCandidat>
+                    <InputSubContainerCandidat>
+                        <p>Ville</p>
+                        <input type="text"  />
+                    </InputSubContainerCandidat>
+                </InputContainerCandidat>
+                <InputContainerCandidat>
+                    <InputSubContainerCandidat>
+                        <p>Genre</p>
+                        <input type="text"  />
+                    </InputSubContainerCandidat>
+                    <InputSubContainerCandidat>
+                        <p>Pays</p>
+                        <input type="text"  />
+                    </InputSubContainerCandidat>
+                    <InputSubContainerCandidat>
+                        <p>Numero de telephone</p>
+                        <input type="text"  />
+                    </InputSubContainerCandidat>
+                </InputContainerCandidat>
+            </InputContainerC>
+        </ContainerCandidat>
     );
 }
 
