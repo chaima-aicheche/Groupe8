@@ -8,72 +8,133 @@ class ArticleService {
     constructor() {}
 
     /**
-     * Méthode pour récupérer le dernier article consulté par un candidat.
-     * @param data :: id du candidat.
+     * Méthode pour créer un article.
+     * @param data
      */
-    async getLatestArticle(data: any){
+    async createArticle(data: any){
         let response;
 
-        // On récupère le dernier article consulté par un candidat via l'id_candidat.
-        const id_candidat = Number(this.utils.sanitizeInput(data.id_candidat));
-        const lastArticle = await this.model.getLatestArticle(id_candidat);
-
-        // Si le candidat n'a aucun article récent en table.
-        if(!lastArticle){
+        // On vérifie que les données sont correctes.
+        if(!this.utils.controleDataCreation(data)){
             response = {
                 code: 400,
-                message: "Ce candidat n'a consulté aucun article récemment.",
-            }
+                message: "Merci de fournir des données correctes."
+            };
             return response;
         }
 
-        // On retourne le dernier article consulté.
+        // On sette les données pour la création.
+        const idFormateur = Number(data.id_formateur);
+        const titre = data.titre;
+        const categorie = data.categorie;
+        const description = data.description;
+        const contenu = data.contenu;
+        const image = data.image;
+        const datePublication = new Date().toISOString();
+
+        // On crée l'article.
+        await this.model.createArticle(idFormateur, titre, categorie, description, contenu, image, datePublication);
+
+        // On retourne la réponse.
         response = {
             code: 200,
-            message: "Le dernier article consulté par le candidat a bien été récupéré.",
-            id_article: lastArticle.id_article,
-            id_candidat: lastArticle.id_candidat,
-            date_lecture: lastArticle.date_lecture
+            message: "Article créé avec succès."
         };
+        return response;
+    }
 
+    /**
+     * Méthode pour modifier un article existant.
+     * @param data
+     */
+    async updateArticle(data: any){
+        let response;
+
+        // On vérifie que les données sont correctes.
+        if(!this.utils.controleDataUpdate(data)){
+            response = {
+                code: 400,
+                message: "Merci de fournir des données correctes."
+            };
+            return response;
+        }
+
+        // On sette les données pour la modification.
+        const idArticle = Number(data.id_article);
+        const titre = data.titre;
+        const categorie = data.categorie;
+        const description = data.description;
+        const contenu = data.contenu;
+        const image = data.image;
+
+        // On modifie l'article.
+        await this.model.updateArticle(idArticle, titre, categorie, description, contenu, image);
+
+        // On retourne la réponse.
+        response = {
+            code: 200,
+            message: "Article modifiée avec succès."
+        };
         return response;
     }
 
 
     /**
-     * Méthode pour ajouter un modifier un article dans l'historique d'un candidat.
+     * Méthode pour supprimer un article.
      * @param data
      */
-    async addReadedArticle(data: any){
+    async deleteArticle(data: any){
         let response;
 
-        // On nettoie les données reçues.
-        const idCandidat = Number(this.utils.sanitizeInput(data.id_candidat));
-        const idArticle = Number(this.utils.sanitizeInput(data.id_article));
+        // On sette l'idArticle pour la suppression.
+        const idArticle = Number(data.id_article);
 
-        const dateLecture: string = new Date().toISOString();
+        // On supprime d'abord toutes les lignes de la table historique_lecture où l'idArticle est présent.
+        await this.model.deleteHistorique(idArticle);
 
+        // Puis l'article lui-même.
+        const checkDelete = await this.model.deleteArticle(idArticle);
 
-        // On vérifie si le candidat a déjç un article en base.
-        const lastArticle = await this.model.getLatestArticle(idCandidat);
-        if(!lastArticle){
-            await this.model.addReadedArticle(idArticle, idCandidat, dateLecture);
-
-            response = {
-                code: 200,
-                message: "Ajout de l'article dans l'historique du candidat réussie."
+        // Si aucun article n'a été trouvé avec cet ID.
+        if(!checkDelete){
+            response= {
+                code: 400,
+                message: "Aucune article n'a pu être trouvée avec cet ID."
             };
             return response;
         }
-        else{
-           await this.model.updateReadedArticle(idArticle, idCandidat, dateLecture);
 
+        // On retourne la réponse.
+        response = {
+            code: 200,
+            message: "Article supprimé avec succès."
+        };
+        return response;
+    }
+
+
+
+    async getArticle(data: any){
+        let response;
+
+        // On sette l'idArticle pour la suppression.
+        const idArticle = Number(data.id_article);
+
+        const article = await this.model.getArticle(idArticle);
+        if(article.length < 1){
             response = {
-                code: 200,
-                message: "Modification de l'article dans l'historique du candidat réussie."
+                code: 400,
+                message: "Aucun article n'a pu être trouvé avec cet ID."
             };
+            return response;
         }
 
+        // On retourne la réponse.
+        response = {
+            code: 200,
+            message: "Article récupéré avec succès.",
+            article: article
+        };
         return response;
     }
 
